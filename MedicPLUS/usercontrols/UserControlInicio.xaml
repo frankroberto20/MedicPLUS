@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="MedicPLUS.usercontrols.UserControlInicio"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:MedicPLUS"
+             TextElement.FontWeight="Regular"
+             TextElement.FontSize="13"
+             TextOptions.TextFormattingMode="Ideal" 
+             TextOptions.TextRenderingMode="Auto"       
+             mc:Ignorable="d"
+             Background="{DynamicResource MaterialDesignPaper}"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             FontFamily="{DynamicResource MaterialDesignFont}"
+             d:DesignHeight="710" d:DesignWidth="1100">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <Grid Height="200" Width="1100" VerticalAlignment="Top">
+                <Label Content="INICIO" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="72" Margin="40" FontWeight="Bold" Foreground="#FF81D4FA"/>
+                <Label Content="Dr. Roberto Chávez - Cirujano Oftalmólogo" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="16" Margin="50" FontStyle="Italic"/>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>
