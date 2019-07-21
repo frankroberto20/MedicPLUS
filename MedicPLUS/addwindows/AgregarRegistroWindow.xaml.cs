@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MedicPLUS.classes;
+using MedicPLUS.usercontrols;
 
 namespace MedicPLUS.addwindows
 {
@@ -43,6 +44,7 @@ namespace MedicPLUS.addwindows
             AnexosListView.ItemsSource = ultimoRegistro.Anexos;
             MediosListView.ItemsSource = ultimoRegistro.Medios;
             FondoOjoListView.ItemsSource = ultimoRegistro.FondoOjo;
+            TratamientoListView.ItemsSource = ultimoRegistro.Tratamiento;
 
             OjoDerechoAVITextBox.Text = ultimoRegistro.OjoDerecho.AgudezaVisualInicial;
             OjoDerechoAVFTextBox.Text = ultimoRegistro.OjoDerecho.AgudezaVisualFinal;
@@ -87,6 +89,16 @@ namespace MedicPLUS.addwindows
             AgregarRegistroBtn.IsEnabled = false;
             SaveBtn.Visibility = Visibility.Visible;
 
+            AntecedentesPersonalesListView.ItemsSource = UserControlPacientes.AntecedentesPersonalesMainLst;
+            AntecedentesFamiliaresListView.ItemsSource = UserControlPacientes.AntecedentesFamiliaresMainLst;
+            MotivoConsultaListView.ItemsSource = UserControlPacientes.MotivoConsultaMainLst;
+            SignosSintomasListView.ItemsSource = UserControlPacientes.SignosSintomasMainLst;
+            SegmentoAnteriorListView.ItemsSource = UserControlPacientes.SegmentoAnteriorMainLst;
+            AnexosListView.ItemsSource = UserControlPacientes.AnexosMainLst;
+            MediosListView.ItemsSource = UserControlPacientes.MediosMainLst;
+            FondoOjoListView.ItemsSource = UserControlPacientes.FondoOjoMainLst;
+            TratamientoListView.ItemsSource = UserControlPacientes.TratamientoMainLst;
+
             AntecedentesPersonalesListView.ItemContainerStyle = (Style)Resources["ListBoxEditMode"];
             AntecedentesPersonalesOpenDialogHostBtn.Visibility = Visibility.Visible;
 
@@ -110,6 +122,9 @@ namespace MedicPLUS.addwindows
 
             FondoOjoListView.ItemContainerStyle = (Style)Resources["ListBoxEditMode"];
             FondoOjoOpenDialogHostBtn.Visibility = Visibility.Visible;
+
+            TratamientoListView.ItemContainerStyle = (Style)Resources["ListBoxEditMode"];
+            TratamientoOpenDialogHostBtn.Visibility = Visibility.Visible;
 
             OjoDerechoAVITextBox.IsReadOnly = false;
             OjoDerechoAVFTextBox.IsReadOnly = false;
@@ -164,6 +179,16 @@ namespace MedicPLUS.addwindows
             OjoDerecho ojoDerecho = new OjoDerecho { AgudezaVisualInicial = OjoDerechoAVITextBox.Text, AgudezaVisualFinal = OjoDerechoAVFTextBox.Text, Adicion = OjoDerechoAdicionTextBox.Text, Cilindro = OjoDerechoCilindroTextBox.Text, DistanciaPupilar = OjoDerechoDistanciaPupilarTextBox.Text, Eje = OjoDerechoEjeTextBox.Text, Esfera = OjoDerechoEsferaTextBox.Text, PresionOcular = OjoDerechoPresionOcularTextBox.Text, TipoLente = OjoDerechoTipoLenteTextBox.Text };
             OjoIzquierdo ojoIzquierdo = new OjoIzquierdo { AgudezaVisualInicial = OjoIzquierdoAVITextBox.Text, AgudezaVisualFinal = OjoIzquierdoAVFTextBox.Text, Adicion = OjoIzquierdoAdicionTextBox.Text, Cilindro = OjoIzquierdoCilindroTextBox.Text, DistanciaPupilar = OjoIzquierdoDistanciaPupilarTextBox.Text, Eje = OjoIzquierdoEjeTextBox.Text, Esfera = OjoIzquierdoEsferaTextBox.Text, PresionOcular = OjoIzquierdoPresionOcularTextBox.Text, TipoLente = OjoIzquierdoTipoLenteTextBox.Text };
             fileData.CrearRegistro(Paciente, AntecedentesPersonalesListView.SelectedItems.Cast<string>().ToList(), AntecedentesFamiliaresListView.SelectedItems.Cast<string>().ToList(), MotivoConsultaListView.SelectedItems.Cast<string>().ToList(), SignosSintomasListView.SelectedItems.Cast<string>().ToList(), SegmentoAnteriorListView.SelectedItems.Cast<string>().ToList(), AnexosListView.SelectedItems.Cast<string>().ToList(), MediosListView.SelectedItems.Cast<string>().ToList(), FondoOjoListView.SelectedItems.Cast<string>().ToList(), ojoIzquierdo, ojoDerecho, DiagnosticoTextBox.Text, NotasTextBox.Text);
+        }
+
+        private void AddAntecedentesPersonalesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (AntecedentesPersonalesTextBox.Text != "")
+            {
+                fileData.AgregarListaRegistros(UserControlPacientes.AntecedentesPersonalesMainLst, AntecedentesPersonalesTextBox.Text, FileData.RegistrosPropiedades.AntecedentesPersonales);
+            }
+            AntecedentesPersonalesListView.ItemsSource = null;
+            AntecedentesPersonalesListView.ItemsSource = UserControlPacientes.AntecedentesPersonalesMainLst;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace MedicPLUS.classes
     {
         public string FilePathPacientes = "./data/Paciente/Pacientes.csv";
         public string DataDirectory = "./data";
-        string[] PropiedadesRegistro = { "antecedentesPersonales", "antecedentesFamiliares", "motivoConsulta", "signosSintomas", "segmentoAnterior", "anexos", "medios", "fondoOjo" };
+        string[] PropiedadesRegistro = { "antecedentesPersonales", "antecedentesFamiliares", "motivoConsulta", "signosSintomas", "segmentoAnterior", "anexos", "medios", "fondoOjo", "tratamiento", "diagnostico", "notas" };
         string[] OjosRegistro = { "ojoDerecho", "ojoIzquierdo" };
 
         public enum RegistrosPropiedades
@@ -24,7 +24,8 @@ namespace MedicPLUS.classes
             SegmentoAnterior,
             Anexos,
             Medios,
-            FondoOjo
+            FondoOjo,
+            Tratamiento
         }
 
         public void RecuperarLista(ObservableCollection<Paciente> pacientes)
@@ -42,9 +43,40 @@ namespace MedicPLUS.classes
 
         }
 
-        public void RecuperarListasRegistros(List<string> antecedentesPersonales, List<string> antecedentesFamiliares, List<string> motivoConsulta, List<string> signosSintomas, List<string> segmentoAnterior, List<string> anexos, List<string> medios, List<string> fondoOjo)
+        public void RecuperarListasRegistros(List<string> antecedentesPersonales, List<string> antecedentesFamiliares, List<string> motivoConsulta, List<string> signosSintomas, List<string> segmentoAnterior, List<string> anexos, List<string> medios, List<string> fondoOjo, List<string> tratamiento)
         {
-            
+            string filePathRegistroLista;
+            RegistrosPropiedades[] registrosPropiedades = { RegistrosPropiedades.AntecedentesPersonales, RegistrosPropiedades.AntecedentesFamiliares, RegistrosPropiedades.MotivoConsulta, RegistrosPropiedades.SignosSintomas, RegistrosPropiedades.SegmentoAnterior, RegistrosPropiedades.Anexos, RegistrosPropiedades.Medios, RegistrosPropiedades.FondoOjo, RegistrosPropiedades.Tratamiento };
+
+            foreach (var propiedad in registrosPropiedades)
+            {
+                filePathRegistroLista = DataDirectory + "/" + propiedad + ".data";
+
+                if (File.Exists(filePathRegistroLista))
+                {
+                    foreach (var line in File.ReadAllLines(filePathRegistroLista))
+                    {
+                        if (propiedad == registrosPropiedades[0])
+                            antecedentesPersonales.Add(line);
+                        if (propiedad == registrosPropiedades[1])
+                            antecedentesFamiliares.Add(line);
+                        if (propiedad == registrosPropiedades[2])
+                            motivoConsulta.Add(line);
+                        if (propiedad == registrosPropiedades[3])
+                            signosSintomas.Add(line);
+                        if (propiedad == registrosPropiedades[4])
+                            segmentoAnterior.Add(line);
+                        if (propiedad == registrosPropiedades[5])
+                            anexos.Add(line);
+                        if (propiedad == registrosPropiedades[6])
+                            medios.Add(line);
+                        if (propiedad == registrosPropiedades[7])
+                            fondoOjo.Add(line);
+                        if (propiedad == registrosPropiedades[8])
+                            tratamiento.Add(line);
+                    }
+                }
+            }
         }
 
         public void RecuperarRegistros(Paciente paciente)
@@ -84,8 +116,10 @@ namespace MedicPLUS.classes
                         if (propiedad == PropiedadesRegistro[7])
                             registro.FondoOjo.Add(line);
                         if (propiedad == PropiedadesRegistro[8])
-                            registro.Diagnostico = line;
+                            registro.Tratamiento.Add(line);
                         if (propiedad == PropiedadesRegistro[9])
+                            registro.Diagnostico = line;
+                        if (propiedad == PropiedadesRegistro[10])
                             registro.Notas = line;
                     }
                 }
@@ -183,6 +217,11 @@ namespace MedicPLUS.classes
                     var data = registro.FondoOjo.ToArray();
                     File.AppendAllLines(filePathRegistro + "/" + propiedad + ".out", data);
                 }
+                if (propiedad == PropiedadesRegistro[8])
+                {
+                    var data = registro.Tratamiento.ToArray();
+                    File.AppendAllLines(filePathRegistro + "/" + propiedad + ".out", data);
+                }
             }
 
             if (!File.Exists(filePathRegistro + "/ojoIzquierdo.out"))
@@ -213,40 +252,53 @@ namespace MedicPLUS.classes
 
         }
 
-        public void AgregarListaRegistros(string text, RegistrosPropiedades propiedad)
+        public void AgregarListaRegistros(List<string> lista, string text, RegistrosPropiedades propiedad)
         {
             string[] data = { text };
 
             if (propiedad == RegistrosPropiedades.AntecedentesPersonales)
             {
-                File.AppendAllLines(DataDirectory + "/" + propiedad + ".out", data);
+                lista.Add(text);
+                File.AppendAllLines(DataDirectory + "/" + propiedad + ".data", data);
             }
             if (propiedad == RegistrosPropiedades.AntecedentesFamiliares)
             {
+                lista.Add(text);
                 File.AppendAllLines(DataDirectory + "/" + propiedad + ".data", data);
             }
             if (propiedad == RegistrosPropiedades.MotivoConsulta)
             {
+                lista.Add(text);
                 File.AppendAllLines(DataDirectory + "/" + propiedad + ".data", data);
             }
             if (propiedad == RegistrosPropiedades.SignosSintomas)
             {
+                lista.Add(text);
                 File.AppendAllLines(DataDirectory + "/" + propiedad + ".data", data);
             }
             if (propiedad == RegistrosPropiedades.SegmentoAnterior)
             {
+                lista.Add(text);
                 File.AppendAllLines(DataDirectory + "/" + propiedad + ".data", data);
             }
             if (propiedad == RegistrosPropiedades.Anexos)
             {
+                lista.Add(text);
                 File.AppendAllLines(DataDirectory + "/" + propiedad + ".data", data);
             }
             if (propiedad == RegistrosPropiedades.Medios)
             {
+                lista.Add(text);
                 File.AppendAllLines(DataDirectory + "/" + propiedad + ".data", data);
             }
             if (propiedad == RegistrosPropiedades.FondoOjo)
             {
+                lista.Add(text);
+                File.AppendAllLines(DataDirectory + "/" + propiedad + ".data", data);
+            }
+            if (propiedad == RegistrosPropiedades.Tratamiento)
+            {
+                lista.Add(text);
                 File.AppendAllLines(DataDirectory + "/" + propiedad + ".data", data);
             }
 

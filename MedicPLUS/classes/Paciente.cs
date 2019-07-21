@@ -41,6 +41,7 @@ namespace MedicPLUS.classes
         public List<string> Anexos { get; set; } = new List<string>();
         public List<string> Medios { get; set; } = new List<string>();
         public List<string> FondoOjo { get; set; } = new List<string>();
+        public List<string> Tratamiento { get; set; } = new List<string>();
         public OjoDerecho OjoDerecho { get; set; } = new OjoDerecho();
         public OjoIzquierdo OjoIzquierdo { get; set; } = new OjoIzquierdo();
         public string Diagnostico { get; set; }

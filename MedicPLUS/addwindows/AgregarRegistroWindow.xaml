@@ -130,12 +130,12 @@
                     <StackPanel>
                         <Grid HorizontalAlignment="Center">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="275"/>
-                                <ColumnDefinition Width="275"/>
-                                <ColumnDefinition Width="275"/>
-                                <ColumnDefinition Width="275"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="170"/>
                                 <RowDefinition Height="170"/>
                                 <RowDefinition Height="170"/>
                                 <RowDefinition Height="300"/>
@@ -144,7 +144,74 @@
                             <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="0" Margin="20,10">
                             Antecedentes Personales
                             </TextBlock>
-                            <materialDesign:DialogHost>
+                            <materialDesign:DialogHost Margin="20,40,20,20">
+                                <materialDesign:DialogHost.DialogContent>
+                                    <StackPanel
+                                        Margin="10">
+                                        <TextBlock>
+                                        Agrege una nueva entrada
+                                        </TextBlock>
+                                        <TextBox
+                                            Margin="0 6 0 0"
+                                            HorizontalAlignment="Stretch"
+                                            x:Name="AntecedentesPersonalesTextBox" />
+                                        <StackPanel
+                                            Orientation="Horizontal"
+                                            HorizontalAlignment="Right">
+                                            <Button x:Name="AddAntecedentesPersonalesBtn"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsDefault="True" Click="AddAntecedentesPersonalesBtn_Click"
+                                                Margin="0 6 6 0"
+                                                Command="materialDesign:DialogHost.CloseDialogCommand">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        True
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                                ACEPTAR
+                                            </Button>
+                                            <Button
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsCancel="True"
+                                                Margin="0 6 6 0"
+                                                Command="materialDesign:DialogHost.CloseDialogCommand">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        False
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                                CANCELAR
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </materialDesign:DialogHost.DialogContent>
+                                <Grid>
+                                    <ListBox x:Name="AntecedentesPersonalesListView" Grid.Row="0"
+                                     BorderBrush="#FF81D4FA" BorderThickness="1"
+                                    VerticalAlignment="Stretch"
+                                    SelectionMode="Multiple" Background="#FFEEEEEE"
+                                     ItemContainerStyle="{StaticResource ListBoxReadMode}">
+                                    </ListBox>
+                                    <Button x:Name="AntecedentesPersonalesOpenDialogHostBtn" Visibility="Hidden"
+                                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                        VerticalAlignment="Top"
+                                        HorizontalAlignment="Right"
+                                        Grid.Row="0"
+                                        Margin="-10"
+                                        Width="30"
+                                        Height="30">
+                                        <materialDesign:PackIcon
+                                            Kind="Plus"
+                                            Height="22"
+                                            Width="22" />
+                                    </Button>
+                                </Grid>
+                            </materialDesign:DialogHost>
+                            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="1" Margin="20,10">
+                            Antecedentes Familiares
+                            </TextBlock>
+                            <materialDesign:DialogHost Grid.Row="0" Grid.Column="1" Margin="20,40,20,20">
                                 <materialDesign:DialogHost.DialogContent>
                                     <StackPanel
                                         Margin="10">
@@ -186,74 +253,7 @@
                                     </StackPanel>
                                 </materialDesign:DialogHost.DialogContent>
                                 <Grid>
-                                    <ListBox x:Name="AntecedentesPersonalesListView" Grid.Row="0" Margin="20,40,20,20"
-                                     BorderBrush="#FF81D4FA" BorderThickness="1"
-                                    VerticalAlignment="Stretch"
-                                    SelectionMode="Multiple" Background="#FFEEEEEE"
-                                     ItemContainerStyle="{StaticResource ListBoxReadMode}">
-                                    </ListBox>
-                                    <Button x:Name="AntecedentesPersonalesOpenDialogHostBtn" Visibility="Hidden"
-                                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
-                                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                                        VerticalAlignment="Top"
-                                        HorizontalAlignment="Right"
-                                        Grid.Row="0"
-                                        Margin="10,30"
-                                        Width="30"
-                                        Height="30">
-                                        <materialDesign:PackIcon
-                                            Kind="Plus"
-                                            Height="22"
-                                            Width="22" />
-                                    </Button>
-                                </Grid>
-                            </materialDesign:DialogHost>
-                            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="1" Margin="20,10">
-                            Antecedentes Familiares
-                            </TextBlock>
-                            <materialDesign:DialogHost Grid.Row="0" Grid.Column="1">
-                                <materialDesign:DialogHost.DialogContent>
-                                    <StackPanel
-                                        Margin="10">
-                                        <TextBlock>
-                                        Agrege una nueva entrada
-                                        </TextBlock>
-                                        <TextBox
-                                            Margin="0 6 0 0"
-                                            HorizontalAlignment="Stretch"
-                                            x:Name="AntecedentesPersonalesTextBox" />
-                                        <StackPanel
-                                            Orientation="Horizontal"
-                                            HorizontalAlignment="Right">
-                                            <Button
-                                                Style="{StaticResource MaterialDesignFlatButton}"
-                                                IsDefault="True"
-                                                Margin="0 6 6 0"
-                                                Command="materialDesign:DialogHost.CloseDialogCommand">
-                                                <Button.CommandParameter>
-                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                                        True
-                                                    </system:Boolean>
-                                                </Button.CommandParameter>
-                                                ACEPTAR
-                                            </Button>
-                                            <Button
-                                                Style="{StaticResource MaterialDesignFlatButton}"
-                                                IsCancel="True"
-                                                Margin="0 6 6 0"
-                                                Command="materialDesign:DialogHost.CloseDialogCommand">
-                                                <Button.CommandParameter>
-                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                                        False
-                                                    </system:Boolean>
-                                                </Button.CommandParameter>
-                                                CANCELAR
-                                            </Button>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </materialDesign:DialogHost.DialogContent>
-                                <Grid>
-                                    <ListBox x:Name="AntecedentesFamiliaresListView" Grid.Row="0" Margin="20,40,20,20"
+                                    <ListBox x:Name="AntecedentesFamiliaresListView" Grid.Row="0" 
                                      BorderBrush="#FF81D4FA" BorderThickness="1"
                                     VerticalAlignment="Stretch"
                                     SelectionMode="Multiple" Background="#FFEEEEEE"
@@ -265,7 +265,7 @@
                                         VerticalAlignment="Top"
                                         HorizontalAlignment="Right"
                                         Grid.Row="0"
-                                        Margin="10,30"
+                                        Margin="-10"
                                         Width="30"
                                         Height="30">
                                         <materialDesign:PackIcon
@@ -278,7 +278,7 @@
                             <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="2" Margin="20,10">
                             Motivo de Consulta
                             </TextBlock>
-                            <materialDesign:DialogHost Grid.Column="2" Grid.Row="0" >
+                            <materialDesign:DialogHost Grid.Column="2" Grid.Row="0" Margin="20,40,20,20">
                                 <materialDesign:DialogHost.DialogContent>
                                     <StackPanel
                                         Margin="10">
@@ -320,7 +320,7 @@
                                     </StackPanel>
                                 </materialDesign:DialogHost.DialogContent>
                                 <Grid>
-                                    <ListBox x:Name="MotivoConsultaListView" Grid.Row="0" Margin="20,40,20,20"
+                                    <ListBox x:Name="MotivoConsultaListView" Grid.Row="0" 
                                      BorderBrush="#FF81D4FA" BorderThickness="1"
                                     VerticalAlignment="Stretch"
                                     SelectionMode="Multiple" Background="#FFEEEEEE"
@@ -332,7 +332,7 @@
                                         VerticalAlignment="Top"
                                         HorizontalAlignment="Right"
                                         Grid.Row="0"
-                                        Margin="10,30"
+                                        Margin="-10"
                                         Width="30"
                                         Height="30">
                                         <materialDesign:PackIcon
@@ -342,10 +342,10 @@
                                     </Button>
                                 </Grid>
                             </materialDesign:DialogHost>
-                            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Row="0" Grid.Column="3" Margin="20,10">
+                            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Row="1" Grid.Column="0" Margin="20,10">
                             Signos y Síntomas
                             </TextBlock>
-                            <materialDesign:DialogHost Grid.Column="3" Grid.Row="0">
+                            <materialDesign:DialogHost Grid.Column="0" Grid.Row="1" Margin="20,40,20,20">
                                 <materialDesign:DialogHost.DialogContent>
                                     <StackPanel
                                         Margin="10">
@@ -387,7 +387,7 @@
                                     </StackPanel>
                                 </materialDesign:DialogHost.DialogContent>
                                 <Grid>
-                                    <ListBox x:Name="SignosSintomasListView" Grid.Row="0" Margin="20,40,20,20"
+                                    <ListBox x:Name="SignosSintomasListView" Grid.Row="1" Grid.Column="0" 
                                      BorderBrush="#FF81D4FA" BorderThickness="1"
                                     VerticalAlignment="Stretch"
                                     SelectionMode="Multiple" Background="#FFEEEEEE"
@@ -399,7 +399,7 @@
                                         VerticalAlignment="Top"
                                         HorizontalAlignment="Right"
                                         Grid.Row="0"
-                                        Margin="10,30"
+                                        Margin="-10"
                                         Width="30"
                                         Height="30">
                                         <materialDesign:PackIcon
@@ -409,10 +409,10 @@
                                     </Button>
                                 </Grid>
                             </materialDesign:DialogHost>
-                            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Row="1" Grid.Column="0" Margin="20,10">
+                            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Row="1" Grid.Column="1" Margin="20,10">
                             Segmento Anterior
                             </TextBlock>
-                            <materialDesign:DialogHost Grid.Column="0" Grid.Row="1">
+                            <materialDesign:DialogHost Grid.Column="1" Grid.Row="1" Margin="20,40,20,20">
                                 <materialDesign:DialogHost.DialogContent>
                                     <StackPanel
                                         Margin="10">
@@ -454,7 +454,7 @@
                                     </StackPanel>
                                 </materialDesign:DialogHost.DialogContent>
                                 <Grid>
-                                    <ListBox x:Name="SegmentoAnteriorListView" Grid.Row="0" Margin="20,40,20,20"
+                                    <ListBox x:Name="SegmentoAnteriorListView" Grid.Row="0" 
                                      BorderBrush="#FF81D4FA" BorderThickness="1"
                                     VerticalAlignment="Stretch"
                                     SelectionMode="Multiple" Background="#FFEEEEEE"
@@ -466,7 +466,7 @@
                                         VerticalAlignment="Top"
                                         HorizontalAlignment="Right"
                                         Grid.Row="0"
-                                        Margin="10,30"
+                                        Margin="-10"
                                         Width="30"
                                         Height="30">
                                         <materialDesign:PackIcon
@@ -476,10 +476,10 @@
                                     </Button>
                                 </Grid>
                             </materialDesign:DialogHost>
-                            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Row="1" Grid.Column="1" Margin="20,10">
+                            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Row="1" Grid.Column="2" Margin="20,10">
                             Anexos
                             </TextBlock>
-                            <materialDesign:DialogHost Grid.Column="1" Grid.Row="1">
+                            <materialDesign:DialogHost Grid.Column="2" Grid.Row="1" Margin="20,40,20,20">
                                 <materialDesign:DialogHost.DialogContent>
                                     <StackPanel
                                         Margin="10">
@@ -521,7 +521,7 @@
                                     </StackPanel>
                                 </materialDesign:DialogHost.DialogContent>
                                 <Grid>
-                                    <ListBox x:Name="AnexosListView" Grid.Row="0" Margin="20,40,20,20"
+                                    <ListBox x:Name="AnexosListView" Grid.Row="0" 
                                      BorderBrush="#FF81D4FA" BorderThickness="1"
                                     VerticalAlignment="Stretch"
                                     SelectionMode="Multiple" Background="#FFEEEEEE"
@@ -533,7 +533,7 @@
                                         VerticalAlignment="Top"
                                         HorizontalAlignment="Right"
                                         Grid.Row="0"
-                                        Margin="10,30"
+                                        Margin="-10"
                                         Width="30"
                                         Height="30">
                                         <materialDesign:PackIcon
@@ -543,10 +543,10 @@
                                     </Button>
                                 </Grid>
                             </materialDesign:DialogHost>
-                            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Row="1" Grid.Column="2" Margin="20,10">
+                            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Row="2" Grid.Column="0" Margin="20,10">
                             Medios
                             </TextBlock>
-                            <materialDesign:DialogHost Grid.Column="2" Grid.Row="1">
+                            <materialDesign:DialogHost Grid.Column="0" Grid.Row="2" Margin="20,40,20,20">
                                 <materialDesign:DialogHost.DialogContent>
                                     <StackPanel
                                         Margin="10">
@@ -588,7 +588,7 @@
                                     </StackPanel>
                                 </materialDesign:DialogHost.DialogContent>
                                 <Grid>
-                                    <ListBox x:Name="MediosListView" Grid.Row="0" Margin="20,40,20,20"
+                                    <ListBox x:Name="MediosListView" Grid.Row="0" 
                                      BorderBrush="#FF81D4FA" BorderThickness="1"
                                     VerticalAlignment="Stretch"
                                     SelectionMode="Multiple" Background="#FFEEEEEE"
@@ -600,7 +600,7 @@
                                         VerticalAlignment="Top"
                                         HorizontalAlignment="Right"
                                         Grid.Row="0"
-                                        Margin="10,30"
+                                        Margin="-10"
                                         Width="30"
                                         Height="30">
                                         <materialDesign:PackIcon
@@ -610,10 +610,10 @@
                                     </Button>
                                 </Grid>
                             </materialDesign:DialogHost>
-                            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Row="1" Grid.Column="3" Margin="20,10">
+                            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Row="2" Grid.Column="1" Margin="20,10">
                             Fondo de Ojo
                             </TextBlock>
-                            <materialDesign:DialogHost Grid.Column="3" Grid.Row="1">
+                            <materialDesign:DialogHost Grid.Column="1" Grid.Row="2" Margin="20,40,20,20">
                                 <materialDesign:DialogHost.DialogContent>
                                     <StackPanel
                                         Margin="10">
@@ -655,7 +655,7 @@
                                     </StackPanel>
                                 </materialDesign:DialogHost.DialogContent>
                                 <Grid>
-                                    <ListBox x:Name="FondoOjoListView" Grid.Row="0" Margin="20,40,20,20"
+                                    <ListBox x:Name="FondoOjoListView" Grid.Row="0" 
                                      BorderBrush="#FF81D4FA" BorderThickness="1"
                                     VerticalAlignment="Stretch"
                                     SelectionMode="Multiple" Background="#FFEEEEEE"
@@ -667,7 +667,7 @@
                                         VerticalAlignment="Top"
                                         HorizontalAlignment="Right"
                                         Grid.Row="0"
-                                        Margin="10,30"
+                                        Margin="-10"
                                         Width="30"
                                         Height="30">
                                         <materialDesign:PackIcon
@@ -677,153 +677,231 @@
                                     </Button>
                                 </Grid>
                             </materialDesign:DialogHost>
-                            <Grid Grid.Row="2" Grid.ColumnSpan="2">
-                                <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
-                            Ojo Derecho
-                                </TextBlock>
-                                <Grid VerticalAlignment="Stretch" Margin="0,60,0,0" HorizontalAlignment="Center">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="160"/>
-                                        <ColumnDefinition Width="160"/>
-                                        <ColumnDefinition Width="160"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <TextBox Grid.Row="0" Grid.Column="0"
+                            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Row="2" Grid.Column="2" Margin="20,10">
+                            Tratamiento
+                            </TextBlock>
+                            <materialDesign:DialogHost Grid.Column="2" Grid.Row="2" Margin="20,40,20,20">
+                                <materialDesign:DialogHost.DialogContent>
+                                    <StackPanel
+                                        Margin="10">
+                                        <TextBlock>
+                                        Agrege una nueva entrada
+                                        </TextBlock>
+                                        <TextBox
+                                            Margin="0 6 0 0"
+                                            HorizontalAlignment="Stretch"
+                                            x:Name="TratamientoTextBox" />
+                                        <StackPanel
+                                            Orientation="Horizontal"
+                                            HorizontalAlignment="Right">
+                                            <Button
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsDefault="True"
+                                                Margin="0 6 6 0"
+                                                Command="materialDesign:DialogHost.CloseDialogCommand">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        True
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                                ACEPTAR
+                                            </Button>
+                                            <Button
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                IsCancel="True"
+                                                Margin="0 6 6 0"
+                                                Command="materialDesign:DialogHost.CloseDialogCommand">
+                                                <Button.CommandParameter>
+                                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                                        False
+                                                    </system:Boolean>
+                                                </Button.CommandParameter>
+                                                CANCELAR
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </materialDesign:DialogHost.DialogContent>
+                                <Grid>
+                                    <ListBox x:Name="TratamientoListView" Grid.Row="0" 
+                                     BorderBrush="#FF81D4FA" BorderThickness="1"
+                                    VerticalAlignment="Stretch"
+                                    SelectionMode="Multiple" Background="#FFEEEEEE"
+                                ItemContainerStyle="{StaticResource ListBoxReadMode}">
+                                    </ListBox>
+                                    <Button x:Name="TratamientoOpenDialogHostBtn" Visibility="Hidden"
+                                        Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                        VerticalAlignment="Top"
+                                        HorizontalAlignment="Right"
+                                        Grid.Row="0"
+                                        Margin="-10"
+                                        Width="30"
+                                        Height="30">
+                                        <materialDesign:PackIcon
+                                            Kind="Plus"
+                                            Height="22"
+                                            Width="22" />
+                                    </Button>
+                                </Grid>
+                            </materialDesign:DialogHost>
+                            <Grid Grid.Row="3" Grid.ColumnSpan="3" Grid.RowSpan="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="275"/>
+                                    <ColumnDefinition Width="275"/>
+                                    <ColumnDefinition Width="275"/>
+                                    <ColumnDefinition Width="275"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="300"/>
+                                    <RowDefinition Height="170"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Grid.ColumnSpan="2">
+                                    <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
+                                        Ojo Derecho
+                                    </TextBlock>
+                                    <Grid VerticalAlignment="Stretch" Margin="0,60,0,0" HorizontalAlignment="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="160"/>
+                                            <ColumnDefinition Width="160"/>
+                                            <ColumnDefinition Width="160"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBox Grid.Row="0" Grid.Column="0"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="AVI" x:Name="OjoDerechoAVITextBox" IsReadOnly="True"
                                              materialDesign:TextFieldAssist.RippleOnFocusEnabled="False"
                                     Margin="10"
                                     VerticalAlignment="Center"/>
-                                    <TextBox Grid.Row="0" Grid.Column="1"
+                                        <TextBox Grid.Row="0" Grid.Column="1"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="AVF" x:Name="OjoDerechoAVFTextBox" IsReadOnly="True"
                                     Margin="10"
                                              materialDesign:TextFieldAssist.RippleOnFocusEnabled="False"
                                     VerticalAlignment="Center" />
-                                    <TextBox Grid.Row="0" Grid.Column="2"
+                                        <TextBox Grid.Row="0" Grid.Column="2"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Esfera" x:Name="OjoDerechoEsferaTextBox" IsReadOnly="True"
                                     Margin="10"
                                              materialDesign:TextFieldAssist.RippleOnFocusEnabled="False"
                                     VerticalAlignment="Center" />
-                                    <TextBox Grid.Row="1" Grid.Column="0"
+                                        <TextBox Grid.Row="1" Grid.Column="0"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Cilindro" x:Name="OjoDerechoCilindroTextBox" IsReadOnly="True"
                                     Margin="10"
                                              materialDesign:TextFieldAssist.RippleOnFocusEnabled="False"
                                     VerticalAlignment="Center" />
-                                    <TextBox Grid.Row="1" Grid.Column="1"
+                                        <TextBox Grid.Row="1" Grid.Column="1"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Eje" x:Name="OjoDerechoEjeTextBox" IsReadOnly="True"
                                     Margin="10"
                                              materialDesign:TextFieldAssist.RippleOnFocusEnabled="False"
                                     VerticalAlignment="Center" />
-                                    <TextBox Grid.Row="1" Grid.Column="2"
+                                        <TextBox Grid.Row="1" Grid.Column="2"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Adicion" x:Name="OjoDerechoAdicionTextBox" IsReadOnly="True"
                                     Margin="10"
                                              materialDesign:TextFieldAssist.RippleOnFocusEnabled="False"
                                     VerticalAlignment="Center" />
-                                    <TextBox Grid.Row="2" Grid.Column="0"
+                                        <TextBox Grid.Row="2" Grid.Column="0"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Presion Ocular" x:Name="OjoDerechoPresionOcularTextBox" IsReadOnly="True"
                                     Margin="10"
                                              materialDesign:TextFieldAssist.RippleOnFocusEnabled="False"
                                     VerticalAlignment="Center" />
-                                    <TextBox Grid.Row="2" Grid.Column="1"
+                                        <TextBox Grid.Row="2" Grid.Column="1"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Distancia Pupilar" x:Name="OjoDerechoDistanciaPupilarTextBox" IsReadOnly="True"
                                     Margin="10"
                                              materialDesign:TextFieldAssist.RippleOnFocusEnabled="False"
                                     VerticalAlignment="Center" />
-                                    <TextBox Grid.Row="2" Grid.Column="2"
+                                        <TextBox Grid.Row="2" Grid.Column="2"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Tipo de Lente" x:Name="OjoDerechoTipoLenteTextBox" IsReadOnly="True"
                                     Margin="10"
                                              materialDesign:TextFieldAssist.RippleOnFocusEnabled="False"
                                     VerticalAlignment="Center" />
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                            <Grid Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2">
-                                <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
+                                <Grid Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2">
+                                    <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20">
                                     Ojo Izquierdo
-                                </TextBlock>
-                                <Grid VerticalAlignment="Stretch" Margin="0,60,0,0" HorizontalAlignment="Center">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="160"/>
-                                        <ColumnDefinition Width="160"/>
-                                        <ColumnDefinition Width="160"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <TextBox Grid.Row="0" Grid.Column="0"
+                                    </TextBlock>
+                                    <Grid VerticalAlignment="Stretch" Margin="0,60,0,0" HorizontalAlignment="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="160"/>
+                                            <ColumnDefinition Width="160"/>
+                                            <ColumnDefinition Width="160"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBox Grid.Row="0" Grid.Column="0"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="AVI" x:Name="OjoIzquierdoAVITextBox" IsReadOnly="True"
                                     Margin="10"
                                              materialDesign:TextFieldAssist.RippleOnFocusEnabled="False"
                                     VerticalAlignment="Center" />
-                                    <TextBox Grid.Row="0" Grid.Column="1"
+                                        <TextBox Grid.Row="0" Grid.Column="1"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="AVF" x:Name="OjoIzquierdoAVFTextBox" IsReadOnly="True"
                                     Margin="10"
                                              materialDesign:TextFieldAssist.RippleOnFocusEnabled="False"
                                     VerticalAlignment="Center" />
-                                    <TextBox Grid.Row="0" Grid.Column="2"
+                                        <TextBox Grid.Row="0" Grid.Column="2"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Esfera" x:Name="OjoIzquierdoEsferaTextBox" IsReadOnly="True"
                                     Margin="10"
                                              materialDesign:TextFieldAssist.RippleOnFocusEnabled="False"
                                     VerticalAlignment="Center" />
-                                    <TextBox Grid.Row="1" Grid.Column="0"
+                                        <TextBox Grid.Row="1" Grid.Column="0"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Cilindro" x:Name="OjoIzquierdoCilindroTextBox" IsReadOnly="True"
                                     Margin="10"
                                              materialDesign:TextFieldAssist.RippleOnFocusEnabled="False"
                                     VerticalAlignment="Center" />
-                                    <TextBox Grid.Row="1" Grid.Column="1"
+                                        <TextBox Grid.Row="1" Grid.Column="1"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Eje" x:Name="OjoIzquierdoEjeTextBox" IsReadOnly="True"
                                     Margin="10"
                                              materialDesign:TextFieldAssist.RippleOnFocusEnabled="False"
                                     VerticalAlignment="Center" />
-                                    <TextBox Grid.Row="1" Grid.Column="2"
+                                        <TextBox Grid.Row="1" Grid.Column="2"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Adicion" x:Name="OjoIzquierdoAdicionTextBox" IsReadOnly="True"
                                     Margin="10"
                                              materialDesign:TextFieldAssist.RippleOnFocusEnabled="False"
                                     VerticalAlignment="Center" />
-                                    <TextBox Grid.Row="2" Grid.Column="0"
+                                        <TextBox Grid.Row="2" Grid.Column="0"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Presion Ocular" x:Name="OjoIzquierdoPresionOcularTextBox" IsReadOnly="True"
                                     Margin="10"
                                              materialDesign:TextFieldAssist.RippleOnFocusEnabled="False"
                                     VerticalAlignment="Center" />
-                                    <TextBox Grid.Row="2" Grid.Column="1"
+                                        <TextBox Grid.Row="2" Grid.Column="1"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Distancia Pupilar" x:Name="OjoIzquierdoDistanciaPupilarTextBox" IsReadOnly="True"
                                     Margin="10"
                                              materialDesign:TextFieldAssist.RippleOnFocusEnabled="False"
                                     VerticalAlignment="Center" />
-                                    <TextBox Grid.Row="2" Grid.Column="2"
+                                        <TextBox Grid.Row="2" Grid.Column="2"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Tipo de Lente" x:Name="OjoIzquierdoTipoLenteTextBox" IsReadOnly="True"
                                     Margin="10"
                                              materialDesign:TextFieldAssist.RippleOnFocusEnabled="False"
                                     VerticalAlignment="Center" />
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                            <Grid Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="0">
-                                <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Row="10" Grid.Column="1" Margin="20">
-                            Diagnostico
-                                </TextBlock>
-                                <TextBox Grid.Row="10"
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0">
+                                    <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Row="10" Grid.Column="1" Margin="20">
+                                    Diagnostico
+                                    </TextBlock>
+                                    <TextBox Grid.Row="1"
                                      Margin="20,20"
                                          Height="70"
                                     TextWrapping="Wrap"
@@ -834,13 +912,13 @@
                                     SpellCheck.IsEnabled="True"
                                     materialDesign:HintAssist.Hint="Diagnostico del Paciente"
                                      x:Name="DiagnosticoTextBox" IsReadOnly="True">
-                                </TextBox>
-                            </Grid>
-                            <Grid Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="2">
-                                <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Row="10" Grid.Column="1" Margin="20">
+                                    </TextBox>
+                                </Grid>
+                                <Grid Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="2">
+                                    <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top"  Grid.Row="10" Grid.Column="1" Margin="20">
                                         Notas
-                                </TextBlock>
-                                <TextBox Grid.Row="10"
+                                    </TextBlock>
+                                    <TextBox Grid.Row="1"
                                      Margin="20,20"
                                          Height="70"
                                     TextWrapping="Wrap"
@@ -851,7 +929,8 @@
                                     SpellCheck.IsEnabled="True"
                                     materialDesign:HintAssist.Hint="Notas del Paciente"
                                      x:Name="NotasTextBox" IsReadOnly="True">
-                                </TextBox>
+                                    </TextBox>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </StackPanel>

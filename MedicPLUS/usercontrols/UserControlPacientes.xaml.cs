@@ -27,6 +27,17 @@ namespace MedicPLUS.usercontrols
 
         public static ObservableCollection<Paciente> Pacientes = new ObservableCollection<Paciente>();
         FileData fileData = new FileData();
+
+        public static List<string> AntecedentesPersonalesMainLst = new List<string>();
+        public static List<string> AntecedentesFamiliaresMainLst = new List<string>();
+        public static List<string> MotivoConsultaMainLst = new List<string>();
+        public static List<string> SignosSintomasMainLst = new List<string>();
+        public static List<string> SegmentoAnteriorMainLst = new List<string>();
+        public static List<string> AnexosMainLst = new List<string>();
+        public static List<string> MediosMainLst = new List<string>();
+        public static List<string> FondoOjoMainLst = new List<string>();
+        public static List<string> TratamientoMainLst = new List<string>();
+
         public UserControlPacientes()
         {
             InitializeComponent();
@@ -39,6 +50,8 @@ namespace MedicPLUS.usercontrols
                 foreach (var paciente in Pacientes)
                     fileData.RecuperarRegistros(paciente);
             }
+
+            fileData.RecuperarListasRegistros(AntecedentesPersonalesMainLst, AntecedentesFamiliaresMainLst, MotivoConsultaMainLst, SignosSintomasMainLst, SegmentoAnteriorMainLst, AnexosMainLst, MediosMainLst, FondoOjoMainLst, TratamientoMainLst);
 
             DataGridPacientes.ItemsSource = Pacientes;
             

@@ -26,54 +26,23 @@ namespace MedicPLUS.addwindows
         FileData fileData = new FileData();
         int[] Edades = new int[120];
 
-        List<string> AntecedentesPersonales_lst = new List<string>();
-        List<string> AntecedentesFamiliares_lst = new List<string>();
-        List<string> MotivoConsulta_lst = new List<string>();
-        List<string> SignosSintomas_lst = new List<string>();
-        List<string> SegmentoAnterior_lst = new List<string>();
-        List<string> Anexos_lst = new List<string>();
-        List<string> Medios_lst = new List<string>();
-        List<string> FondoOjo_lst = new List<string>();
         public AgregarPacienteWindow()
         {
             InitializeComponent();
             for (int x = 0; x < Edades.Length; x++)
                 Edades[x] = x + 1;
 
-            AntecedentesPersonales_lst.Add("hola");
-            AntecedentesPersonales_lst.Add("mundo");
-            AntecedentesPersonales_lst.Add("!");
-
-            AntecedentesFamiliares_lst.Add("hola");
-            AntecedentesFamiliares_lst.Add("mundo");
-
-            MotivoConsulta_lst.Add("!");
-            MotivoConsulta_lst.Add("hola");
-
-            SignosSintomas_lst.Add("mundo");
-            SignosSintomas_lst.Add("!");
-
-            SegmentoAnterior_lst.Add("hola");
-            SegmentoAnterior_lst.Add("mundo");
-            SegmentoAnterior_lst.Add("!");
-
-            Anexos_lst.Add("hola");
-            Anexos_lst.Add("mundo");
-
-            Medios_lst.Add("!");
-
-            FondoOjo_lst.Add("hola");
-            FondoOjo_lst.Add("mundo");
-
             AgeComboBox.ItemsSource = Edades;
-            AntecedentesPersonalesListBox.ItemsSource = AntecedentesPersonales_lst;
-            AntecedentesFamiliaresListBox.ItemsSource = AntecedentesFamiliares_lst;
-            MotivoConsultaListBox.ItemsSource = MotivoConsulta_lst;
-            SignosSintomasListBox.ItemsSource = SignosSintomas_lst;
-            SegmentoAnteriorListBox.ItemsSource = SegmentoAnterior_lst;
-            AnexosListBox.ItemsSource = Anexos_lst;
-            MediosListBox.ItemsSource = Medios_lst;
-            FondoOjoListBox.ItemsSource = FondoOjo_lst;
+
+            AntecedentesPersonalesListBox.ItemsSource = UserControlPacientes.AntecedentesPersonalesMainLst;
+            AntecedentesFamiliaresListBox.ItemsSource = UserControlPacientes.AntecedentesFamiliaresMainLst;
+            MotivoConsultaListBox.ItemsSource = UserControlPacientes.MotivoConsultaMainLst;
+            SignosSintomasListBox.ItemsSource = UserControlPacientes.SignosSintomasMainLst;
+            SegmentoAnteriorListBox.ItemsSource = UserControlPacientes.SegmentoAnteriorMainLst;
+            AnexosListBox.ItemsSource = UserControlPacientes.AnexosMainLst;
+            MediosListBox.ItemsSource = UserControlPacientes.MediosMainLst;
+            FondoOjoListBox.ItemsSource = UserControlPacientes.FondoOjoMainLst;
+            TratamientoListBox.ItemsSource = UserControlPacientes.TratamientoMainLst;
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
@@ -93,6 +62,17 @@ namespace MedicPLUS.addwindows
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
+        }
+
+        private void AddAntecedentesPersonalesBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (AntecedentesPersonalesTextBox.Text != "")
+            {
+                fileData.AgregarListaRegistros(UserControlPacientes.AntecedentesPersonalesMainLst, AntecedentesPersonalesTextBox.Text, FileData.RegistrosPropiedades.AntecedentesPersonales);
+            }
+
+            AntecedentesPersonalesListBox.ItemsSource = null;
+            AntecedentesPersonalesListBox.ItemsSource = UserControlPacientes.AntecedentesPersonalesMainLst;
         }
     }
 }
