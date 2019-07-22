@@ -166,14 +166,14 @@ namespace MedicPLUS.classes
 
             Registro registro = new Registro() { Fecha = DateTime.Now, AntecedentesPersonales = antecedentesPersonales, AntecedentesFamiliares = antecedentesFamiliares, MotivoConsulta = motivoConsulta, SignosSintomas = signosSintomas, SegmentoAnterior = segmentoAnterior, Anexos = anexos, Medios = medios, FondoOjo = fondoOjo, OjoIzquierdo = ojoIzquierdo, OjoDerecho = ojoDerecho, Diagnostico = diagnostico, Notas = notas };
 
-            string directoryFilePathRegistro = directoryRegistro + "/Registro-" + registro.Fecha.ToShortDateString().Replace("/", "-");
+            string directoryFilePathRegistro = directoryRegistro + "/Registro-" + registro.Fecha.ToString("MM/dd/yyyy hh:mm tt").Replace("/", "-").Replace(":", "-");
             Directory.CreateDirectory(directoryFilePathRegistro);
 
-            string filePathRegistro = "./data/Paciente/" + paciente.ID + "-" + paciente.Nombre.Replace(" ", "") + "-Registros/Registro-" + registro.Fecha.ToShortDateString().Replace("/", "-");
+            string filePathRegistro = "./data/Paciente/" + paciente.ID + "-" + paciente.Nombre.Replace(" ", "") + "-Registros/Registro-" + registro.Fecha.ToString("MM/dd/yyyy hh:mm tt").Replace("/", "-").Replace(":", "-");
 
-            File.WriteAllText(filePathRegistro + "/fecha.out", registro.Fecha.ToShortDateString());
+            File.WriteAllText(filePathRegistro + "/fecha.out", registro.Fecha.ToString("MM/dd/yyyy hh:mm tt"));
 
-            
+
             foreach (var propiedad in PropiedadesRegistro)
             {
                 if (propiedad == PropiedadesRegistro[0])

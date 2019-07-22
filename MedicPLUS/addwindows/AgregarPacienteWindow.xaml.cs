@@ -74,5 +74,114 @@ namespace MedicPLUS.addwindows
             AntecedentesPersonalesListBox.ItemsSource = null;
             AntecedentesPersonalesListBox.ItemsSource = UserControlPacientes.AntecedentesPersonalesMainLst;
         }
+
+        private void AddAntecedentesFamiliaresBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (AntecedentesFamiliaresTextBox.Text != "")
+            {
+                fileData.AgregarListaRegistros(UserControlPacientes.AntecedentesFamiliaresMainLst, AntecedentesFamiliaresTextBox.Text, FileData.RegistrosPropiedades.AntecedentesFamiliares);
+            }
+
+            AntecedentesFamiliaresListBox.ItemsSource = null;
+            AntecedentesFamiliaresListBox.ItemsSource = UserControlPacientes.AntecedentesFamiliaresMainLst;
+        }
+
+        private void AddMotivoConsultaBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MotivoConsultaTextBox.Text != "")
+            {
+                fileData.AgregarListaRegistros(UserControlPacientes.MotivoConsultaMainLst, MotivoConsultaTextBox.Text, FileData.RegistrosPropiedades.MotivoConsulta);
+            }
+
+            MotivoConsultaListBox.ItemsSource = null;
+            MotivoConsultaListBox.ItemsSource = UserControlPacientes.MotivoConsultaMainLst;
+        }
+
+        private void AddSignosSintomasBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (SignosSintomasTextBox.Text != "")
+            {
+                fileData.AgregarListaRegistros(UserControlPacientes.SignosSintomasMainLst, SignosSintomasTextBox.Text, FileData.RegistrosPropiedades.SignosSintomas);
+            }
+
+            SignosSintomasListBox.ItemsSource = null;
+            SignosSintomasListBox.ItemsSource = UserControlPacientes.SignosSintomasMainLst;
+        }
+
+        private void AddSegmentoAnteriorBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (SegmentoAnteriorTextBox.Text != "")
+            {
+                fileData.AgregarListaRegistros(UserControlPacientes.SegmentoAnteriorMainLst, SegmentoAnteriorTextBox.Text, FileData.RegistrosPropiedades.SegmentoAnterior);
+            }
+
+            SegmentoAnteriorListBox.ItemsSource = null;
+            SegmentoAnteriorListBox.ItemsSource = UserControlPacientes.SegmentoAnteriorMainLst;
+        }
+
+        private void AddAnexosBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (AnexosTextBox.Text != "")
+            {
+                fileData.AgregarListaRegistros(UserControlPacientes.AnexosMainLst, AnexosTextBox.Text, FileData.RegistrosPropiedades.Anexos);
+            }
+
+            AnexosListBox.ItemsSource = null;
+            AnexosListBox.ItemsSource = UserControlPacientes.AnexosMainLst;
+        }
+
+        private void AddMediosBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (MediosTextBox.Text != "")
+            {
+                fileData.AgregarListaRegistros(UserControlPacientes.MediosMainLst, MediosTextBox.Text, FileData.RegistrosPropiedades.Medios);
+            }
+
+            MediosListBox.ItemsSource = null;
+            MediosListBox.ItemsSource = UserControlPacientes.MediosMainLst;
+        }
+
+        private void AddFondoOjoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (FondoOjoTextBox.Text != "")
+            {
+                fileData.AgregarListaRegistros(UserControlPacientes.FondoOjoMainLst, FondoOjoTextBox.Text, FileData.RegistrosPropiedades.FondoOjo);
+            }
+
+            FondoOjoListBox.ItemsSource = null;
+            FondoOjoListBox.ItemsSource = UserControlPacientes.FondoOjoMainLst;
+        }
+
+        private void AddTratamientoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (TratamientoTextBox.Text != "")
+            {
+                fileData.AgregarListaRegistros(UserControlPacientes.TratamientoMainLst, TratamientoTextBox.Text, FileData.RegistrosPropiedades.Tratamiento);
+            }
+
+            TratamientoListBox.ItemsSource = null;
+            TratamientoListBox.ItemsSource = UserControlPacientes.TratamientoMainLst;
+        }
+
+        private void CloseDialogBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (NameTextBox.Text != "" && LastNameTextBox.Text != "" && AgeComboBox.SelectedItem != null)
+            {
+                SaveBtn.IsEnabled = true;
+            }
+        }
+
+        private void AgeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (NameTextBox.Text != "" && LastNameTextBox.Text != "" && AgeComboBox.SelectedItem != null)
+            {
+                SaveBtn.IsEnabled = true;
+            }
+        }
     }
 }

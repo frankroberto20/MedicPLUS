@@ -40,31 +40,26 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="TextBoxReadMode" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}" TargetType="{x:Type TextBox}">
-            <Setter Property="materialDesign:TextFieldAssist.HasFilledTextField" Value="True" />
-
-            <Setter Property="materialDesign:TextFieldAssist.RippleOnFocusEnabled" Value="True" />
-
-            <Setter Property="materialDesign:TextFieldAssist.TextFieldCornerRadius" Value="4,4,0,0" />
-
-            <Setter Property="materialDesign:TextFieldAssist.UnderlineCornerRadius" Value="0" />
-            <Setter Property="OverridesDefaultStyle" Value="True" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TextBox}">
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsReadOnly" Value="True">
-                                <Setter Property="materialDesign:TextFieldAssist.RippleOnFocusEnabled" Value="False"/>
-                                <Setter Property="materialDesign:TextFieldAssist.NewSpecHighlightingEnabled" Value="False"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
     </Window.Resources>
     <Border Background="{DynamicResource MaterialDesignPaper}" BorderBrush="#FF00BFA5" BorderThickness="0.5" CornerRadius="10">
-        <Grid>
+        <materialDesign:DialogHost>
+            <materialDesign:DialogHost.DialogContent>
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="300" Height="110">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="20">
+                        <materialDesign:PackIcon Kind="PersonAdd" Width="30" Height="30"/>
+                        <TextBlock Margin="15,5" Style="{StaticResource MaterialDesignBody2TextBlock}">
+                            Registro guardado exitosamente!
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15">
+                        <Button x:Name="CloseDialogBtn" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Style="{DynamicResource MaterialDesignFlatButton}"
+                                Click="CloseDialogBtn_Click">
+                            OK
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+            <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="*"/>
@@ -72,7 +67,7 @@
         <Border CornerRadius="10,10,0,0" Background="#FF00BFA5" MouseLeftButtonDown="Border_MouseLeftButtonDown">
             <Grid Grid.ColumnSpan="2">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button x:Name="SaveBtn" Height="20" Width="20" Margin="0,0,10,0" Background="{x:Null}" BorderBrush="{x:Null}" Visibility="Hidden" Click="SaveBtn_Click"
+                            <Button x:Name="SaveBtn" Height="20" Width="20" Margin="0,0,10,0" Background="{x:Null}" BorderBrush="{x:Null}" Visibility="Hidden" Click="SaveBtn_Click" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                         Style="{StaticResource MaterialDesignFloatingActionMiniButton}">
                                 <materialDesign:PackIcon
                             Kind="ContentSave" Foreground="White"
@@ -126,7 +121,19 @@
                                              Height="24"
                                              Width="24"/>
                 </ToggleButton>
-                <ScrollViewer Grid.Row="1">
+                    <Button x:Name="NextRegistroBtn" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" materialDesign:RippleAssist.Feedback="{DynamicResource PrimaryHueMidBrush}"
+                            VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,100,0" Click="NextRegistroBtn_Click">
+                        <materialDesign:PackIcon Kind="ArrowRightBoldCircle"
+                                                 Width="50"
+                                                 Height="50" Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+                    </Button>
+                    <Button x:Name="PreviousRegistroBtn" Style="{StaticResource MaterialDesignFloatingActionAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" materialDesign:RippleAssist.Feedback="{DynamicResource PrimaryHueMidBrush}"
+                            VerticalAlignment="Center" HorizontalAlignment="Left" Margin="100,0,0,0" Click="PreviousRegistroBtn_Click">
+                        <materialDesign:PackIcon Kind="ArrowLeftBoldCircle"
+                                                 Width="50"
+                                                 Height="50" Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+                    </Button>
+                    <ScrollViewer Grid.Row="1">
                     <StackPanel>
                         <Grid HorizontalAlignment="Center">
                             <Grid.ColumnDefinitions>
@@ -225,9 +232,9 @@
                                         <StackPanel
                                             Orientation="Horizontal"
                                             HorizontalAlignment="Right">
-                                            <Button
+                                            <Button x:Name="AddAntecedentesFamiliaresBtn"
                                                 Style="{StaticResource MaterialDesignFlatButton}"
-                                                IsDefault="True"
+                                                IsDefault="True" Click="AddAntecedentesFamiliaresBtn_Click"
                                                 Margin="0 6 6 0"
                                                 Command="materialDesign:DialogHost.CloseDialogCommand">
                                                 <Button.CommandParameter>
@@ -292,9 +299,9 @@
                                         <StackPanel
                                             Orientation="Horizontal"
                                             HorizontalAlignment="Right">
-                                            <Button
+                                            <Button x:Name="AddMotivoConsultaBtn"
                                                 Style="{StaticResource MaterialDesignFlatButton}"
-                                                IsDefault="True"
+                                                IsDefault="True" Click="AddMotivoConsultaBtn_Click"
                                                 Margin="0 6 6 0"
                                                 Command="materialDesign:DialogHost.CloseDialogCommand">
                                                 <Button.CommandParameter>
@@ -359,9 +366,9 @@
                                         <StackPanel
                                             Orientation="Horizontal"
                                             HorizontalAlignment="Right">
-                                            <Button
+                                            <Button x:Name="AddSignosSintomasBtn"
                                                 Style="{StaticResource MaterialDesignFlatButton}"
-                                                IsDefault="True"
+                                                IsDefault="True" Click="AddSignosSintomasBtn_Click"
                                                 Margin="0 6 6 0"
                                                 Command="materialDesign:DialogHost.CloseDialogCommand">
                                                 <Button.CommandParameter>
@@ -426,9 +433,9 @@
                                         <StackPanel
                                             Orientation="Horizontal"
                                             HorizontalAlignment="Right">
-                                            <Button
+                                            <Button x:Name="AddSegmentoAnteriorBtn"
                                                 Style="{StaticResource MaterialDesignFlatButton}"
-                                                IsDefault="True"
+                                                IsDefault="True" Click="AddSegmentoAnteriorBtn_Click"
                                                 Margin="0 6 6 0"
                                                 Command="materialDesign:DialogHost.CloseDialogCommand">
                                                 <Button.CommandParameter>
@@ -493,9 +500,9 @@
                                         <StackPanel
                                             Orientation="Horizontal"
                                             HorizontalAlignment="Right">
-                                            <Button
+                                            <Button x:Name="AddAnexosBtn"
                                                 Style="{StaticResource MaterialDesignFlatButton}"
-                                                IsDefault="True"
+                                                IsDefault="True" Click="AddAnexosBtn_Click"
                                                 Margin="0 6 6 0"
                                                 Command="materialDesign:DialogHost.CloseDialogCommand">
                                                 <Button.CommandParameter>
@@ -560,9 +567,9 @@
                                         <StackPanel
                                             Orientation="Horizontal"
                                             HorizontalAlignment="Right">
-                                            <Button
+                                            <Button x:Name="AddMediosBtn"
                                                 Style="{StaticResource MaterialDesignFlatButton}"
-                                                IsDefault="True"
+                                                IsDefault="True" Click="AddMediosBtn_Click"
                                                 Margin="0 6 6 0"
                                                 Command="materialDesign:DialogHost.CloseDialogCommand">
                                                 <Button.CommandParameter>
@@ -627,9 +634,9 @@
                                         <StackPanel
                                             Orientation="Horizontal"
                                             HorizontalAlignment="Right">
-                                            <Button
+                                            <Button x:Name="AddFondoOjoBtn"
                                                 Style="{StaticResource MaterialDesignFlatButton}"
-                                                IsDefault="True"
+                                                IsDefault="True" Click="AddFondoOjoBtn_Click"
                                                 Margin="0 6 6 0"
                                                 Command="materialDesign:DialogHost.CloseDialogCommand">
                                                 <Button.CommandParameter>
@@ -694,9 +701,9 @@
                                         <StackPanel
                                             Orientation="Horizontal"
                                             HorizontalAlignment="Right">
-                                            <Button
+                                            <Button x:Name="AddTratamientoBtn"
                                                 Style="{StaticResource MaterialDesignFlatButton}"
-                                                IsDefault="True"
+                                                IsDefault="True" Click="AddTratamientoBtn_Click"
                                                 Margin="0 6 6 0"
                                                 Command="materialDesign:DialogHost.CloseDialogCommand">
                                                 <Button.CommandParameter>
@@ -937,5 +944,6 @@
                 </ScrollViewer>
             </Grid>
         </Grid>
+        </materialDesign:DialogHost>
     </Border>
 </Window>
