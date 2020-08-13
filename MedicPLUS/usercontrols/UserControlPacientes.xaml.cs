@@ -53,7 +53,7 @@ namespace MedicPLUS.usercontrols
 
             fileData.RecuperarListasRegistros(AntecedentesPersonalesMainLst, AntecedentesFamiliaresMainLst, MotivoConsultaMainLst, SignosSintomasMainLst, SegmentoAnteriorMainLst, AnexosMainLst, MediosMainLst, FondoOjoMainLst, TratamientoMainLst);
 
-            DataGridPacientes.ItemsSource = Pacientes;
+            DataGridPacientes.ItemsSource = DBManager.GetPacientes();
             
         }
 

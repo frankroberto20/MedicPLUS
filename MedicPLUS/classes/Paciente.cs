@@ -8,8 +8,7 @@ namespace MedicPLUS.classes
 {
     public class Paciente
     {
-        static int Counter = 1001;
-        public string ID { get; set; }
+        public int ID { get; set; }
         public string Nombre { get; set; }
         public string Apellidos { get; set; }
         public string Telefono { get; set; }
@@ -18,10 +17,6 @@ namespace MedicPLUS.classes
 
         public List<Registro> Registros { get; set; } = new List<Registro>();
 
-        public Paciente()
-        {
-            ID = "PC" + Convert.ToString(Counter++);
-        }
 
         public string ToFile()
         {
@@ -32,6 +27,7 @@ namespace MedicPLUS.classes
 
     public class Registro {
 
+        public int ID {get;set;}
         public DateTime Fecha { get; set; }
         public List<string> AntecedentesPersonales { get; set; } = new List<string>();
         public List<string> AntecedentesFamiliares { get; set; } = new List<string>();

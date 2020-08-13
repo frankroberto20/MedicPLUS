@@ -52,11 +52,44 @@ namespace MedicPLUS.addwindows
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             Paciente paciente = new Paciente() { Nombre = NameTextBox.Text, Apellidos = LastNameTextBox.Text, Telefono = PhoneTextBox.Text, Correo = MailTextBox.Text, Edad = (int)AgeComboBox.SelectedItem };
-            OjoDerecho ojoDerecho = new OjoDerecho { AgudezaVisualInicial = OjoDerechoAVITextBox.Text, AgudezaVisualFinal = OjoDerechoAVFTextBox.Text, Adicion = OjoDerechoAdicionTextBox.Text, Cilindro = OjoDerechoCilindroTextBox.Text, DistanciaPupilar = OjoDerechoDistanciaPupilarTextBox.Text, Eje = OjoDerechoEjeTextBox.Text, Esfera = OjoDerechoEsferaTextBox.Text, PresionOcular = OjoDerechoPresionOcularTextBox.Text, TipoLente = OjoDerechoTipoLenteTextBox.Text };
-            OjoIzquierdo ojoIzquierdo = new OjoIzquierdo { AgudezaVisualInicial = OjoIzquierdoAVITextBox.Text, AgudezaVisualFinal = OjoIzquierdoAVFTextBox.Text, Adicion = OjoIzquierdoAdicionTextBox.Text, Cilindro = OjoIzquierdoCilindroTextBox.Text, DistanciaPupilar = OjoIzquierdoDistanciaPupilarTextBox.Text, Eje = OjoIzquierdoEjeTextBox.Text, Esfera = OjoIzquierdoEsferaTextBox.Text, PresionOcular = OjoIzquierdoPresionOcularTextBox.Text, TipoLente = OjoIzquierdoTipoLenteTextBox.Text };
 
-            fileData.AgregarPaciente(UserControlPacientes.Pacientes, paciente);
-            fileData.CrearRegistro(paciente, AntecedentesPersonalesListBox.SelectedItems.Cast<string>().ToList(), AntecedentesFamiliaresListBox.SelectedItems.Cast<string>().ToList(), MotivoConsultaListBox.SelectedItems.Cast<string>().ToList(), SignosSintomasListBox.SelectedItems.Cast<string>().ToList(), SegmentoAnteriorListBox.SelectedItems.Cast<string>().ToList(), AnexosListBox.SelectedItems.Cast<string>().ToList(), MediosListBox.SelectedItems.Cast<string>().ToList(), FondoOjoListBox.SelectedItems.Cast<string>().ToList(), ojoIzquierdo, ojoDerecho, DiagnosticoTextBox.Text, NotasTextBox.Text);
+            OjoDerecho ojoDerecho = new OjoDerecho { AgudezaVisualInicial = OjoDerechoAVITextBox.Text, 
+                AgudezaVisualFinal = OjoDerechoAVFTextBox.Text, 
+                Adicion = OjoDerechoAdicionTextBox.Text, 
+                Cilindro = OjoDerechoCilindroTextBox.Text, 
+                DistanciaPupilar = OjoDerechoDistanciaPupilarTextBox.Text, 
+                Eje = OjoDerechoEjeTextBox.Text, 
+                Esfera = OjoDerechoEsferaTextBox.Text, 
+                PresionOcular = OjoDerechoPresionOcularTextBox.Text, 
+                TipoLente = OjoDerechoTipoLenteTextBox.Text };
+
+            OjoIzquierdo ojoIzquierdo = new OjoIzquierdo { AgudezaVisualInicial = OjoIzquierdoAVITextBox.Text, 
+                AgudezaVisualFinal = OjoIzquierdoAVFTextBox.Text, 
+                Adicion = OjoIzquierdoAdicionTextBox.Text, 
+                Cilindro = OjoIzquierdoCilindroTextBox.Text, 
+                DistanciaPupilar = OjoIzquierdoDistanciaPupilarTextBox.Text, 
+                Eje = OjoIzquierdoEjeTextBox.Text, 
+                Esfera = OjoIzquierdoEsferaTextBox.Text, 
+                PresionOcular = OjoIzquierdoPresionOcularTextBox.Text, 
+                TipoLente = OjoIzquierdoTipoLenteTextBox.Text };
+
+            Registro registro = new Registro{
+                AntecedentesPersonales = AntecedentesPersonalesListBox.SelectedItems.Cast<string>().ToList(),
+                AntecedentesFamiliares = AntecedentesFamiliaresListBox.SelectedItems.Cast<string>().ToList(),
+                MotivoConsulta = MotivoConsultaListBox.SelectedItems.Cast<string>().ToList(), 
+                SignosSintomas = SignosSintomasListBox.SelectedItems.Cast<string>().ToList(), 
+                SegmentoAnterior = SegmentoAnteriorListBox.SelectedItems.Cast<string>().ToList(), 
+                Anexos = AnexosListBox.SelectedItems.Cast<string>().ToList(), 
+                Medios = MediosListBox.SelectedItems.Cast<string>().ToList(), 
+                FondoOjo = FondoOjoListBox.SelectedItems.Cast<string>().ToList(), 
+                OjoIzquierdo = ojoIzquierdo, 
+                OjoDerecho = ojoDerecho, 
+                Diagnostico = DiagnosticoTextBox.Text, 
+                Notas = NotasTextBox.Text
+            };
+
+            DBManager.InsertPaciente(paciente);
+            DBManager.InsertRegistro(paciente, registro);
         }
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

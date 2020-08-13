@@ -30,7 +30,7 @@ namespace MedicPLUS.addwindows
         public AgregarRegistroWindow(Paciente paciente)
         {
             InitializeComponent();
-
+            paciente.Registros = DBManager.GetRegistrosPaciente(paciente.ID);
             Paciente = paciente;
 
             NombrePacienteTextBlock.Text = Paciente.Nombre + " " + Paciente.Apellidos;

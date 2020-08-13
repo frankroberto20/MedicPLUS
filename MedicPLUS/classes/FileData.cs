@@ -35,7 +35,7 @@ namespace MedicPLUS.classes
                 var data = line.Split(',');
                 if (data.Length == 6)
                 {
-                    Paciente paciente = new Paciente { ID = data[0], Nombre = data[1], Apellidos = data[2], Telefono = data[3], Correo = data[4], Edad = Convert.ToInt32(data[5]) };
+                    Paciente paciente = new Paciente { ID = Convert.ToInt32(data[0]), Nombre = data[1], Apellidos = data[2], Telefono = data[3], Correo = data[4], Edad = Convert.ToInt32(data[5]) };
                     pacientes.Add(paciente);
                 }
 
