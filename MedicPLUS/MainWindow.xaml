@@ -25,7 +25,9 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="2"  Background="#FF80DEEA" Panel.ZIndex="1">
-            <StackPanel Margin="0,250,0,0">
+            <StackPanel>
+                <Image Source="./resources/medicPlus.png"
+                       Margin="15,40"/>
                 <Button x:Name="btnInicio"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     Margin="10, 10, 10, 20" Height="80" Content="INICIO" FontSize="24" Click="Inicio_Click"/>
@@ -44,6 +46,17 @@
             
         </Grid>
         <Grid Grid.ColumnSpan="2" Background="#FF00BCD4" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <Image Source="./resources/medicPlus.png" 
+                       Margin="10,5,0,5"/>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource MaterialDesignTitleTextBlock}" FontWeight="Light"
+                           Margin="10,0,0,0">
+                        Medic
+                </TextBlock>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource MaterialDesignTitleTextBlock}" FontStyle="Italic">
+                        PLUS
+                </TextBlock>
+            </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Height="30" Width="30" Margin="5" Background="{x:Null}" BorderBrush="{x:Null}" Click="Minimize_Click"
                     Style="{StaticResource MaterialDesignFloatingActionMiniButton}">

@@ -13,7 +13,8 @@
         Background="{x:Null}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="AgregarPacienteWindow" Height="930" Width="800" WindowStyle="None" AllowsTransparency="True">
+        Title="AgregarPacienteWindow" Height="930" Width="800" WindowStyle="None" AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="ListBoxCheckBox" TargetType="ListBoxItem">
             <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -454,7 +455,7 @@
                                     <Grid>
                                         <ListBox x:Name="SegmentoAnteriorListBox" Grid.Row="3"
                                      BorderBrush="#FF81D4FA" BorderThickness="1"
-                                    VerticalAlignment="Stretch" Background="#FFEEEEEE" ItemContainerStyle="{StaticResource ListBoxCheckBox}"/>
+                                     SelectionMode="Multiple"   VerticalAlignment="Stretch" Background="#FFEEEEEE" ItemContainerStyle="{StaticResource ListBoxCheckBox}"/>
                                         <Button
                                         Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                         Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
@@ -518,7 +519,7 @@
                                     <Grid>
                                         <ListBox x:Name="AnexosListBox" Grid.Row="4"
                                      BorderBrush="#FF81D4FA" BorderThickness="1"
-                                    VerticalAlignment="Stretch" Background="#FFEEEEEE" ItemContainerStyle="{StaticResource ListBoxCheckBox}"/>
+                                     SelectionMode="Multiple"   VerticalAlignment="Stretch" Background="#FFEEEEEE" ItemContainerStyle="{StaticResource ListBoxCheckBox}"/>
                                         <Button
                                         Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                         Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
@@ -582,7 +583,7 @@
                                     <Grid>
                                         <ListBox x:Name="MediosListBox" Grid.Row="5"
                                      BorderBrush="#FF81D4FA" BorderThickness="1"
-                                    VerticalAlignment="Stretch" Background="#FFEEEEEE" ItemContainerStyle="{StaticResource ListBoxCheckBox}"/>
+                                     SelectionMode="Multiple"   VerticalAlignment="Stretch" Background="#FFEEEEEE" ItemContainerStyle="{StaticResource ListBoxCheckBox}"/>
                                         <Button
                                         Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                         Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
@@ -646,7 +647,7 @@
                                     <Grid>
                                         <ListBox x:Name="FondoOjoListBox" Grid.Row="0"
                                      BorderBrush="#FF81D4FA" BorderThickness="1"
-                                    VerticalAlignment="Stretch" Background="#FFEEEEEE" ItemContainerStyle="{StaticResource ListBoxCheckBox}"/>
+                                     SelectionMode="Multiple"   VerticalAlignment="Stretch" Background="#FFEEEEEE" ItemContainerStyle="{StaticResource ListBoxCheckBox}"/>
                                         <Button
                                         Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                         Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
@@ -710,7 +711,7 @@
                                     <Grid>
                                         <ListBox x:Name="TratamientoListBox" Grid.Row="0"
                                      BorderBrush="#FF81D4FA" BorderThickness="1"
-                                    VerticalAlignment="Stretch" Background="#FFEEEEEE" ItemContainerStyle="{StaticResource ListBoxCheckBox}"/>
+                                     SelectionMode="Multiple"   VerticalAlignment="Stretch" Background="#FFEEEEEE" ItemContainerStyle="{StaticResource ListBoxCheckBox}"/>
                                         <Button
                                         Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
                                         Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
@@ -744,47 +745,47 @@
                                     <TextBox Grid.Row="0" Grid.Column="0"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="AVI" x:Name="OjoDerechoAVITextBox"
-                                    Margin="20"
+                                    Margin="10" TextChanged="TextBox_TextChanged"
                                     VerticalAlignment="Center" />
                                     <TextBox Grid.Row="0" Grid.Column="1"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="AVF" x:Name="OjoDerechoAVFTextBox"
-                                    Margin="20"
+                                    Margin="10" TextChanged="TextBox_TextChanged"
                                     VerticalAlignment="Center" />
                                     <TextBox Grid.Row="0" Grid.Column="2"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Esfera" x:Name="OjoDerechoEsferaTextBox"
-                                    Margin="20"
+                                    Margin="10" TextChanged="TextBox_TextChanged"
                                     VerticalAlignment="Center" />
                                     <TextBox Grid.Row="1" Grid.Column="0"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Cilindro" x:Name="OjoDerechoCilindroTextBox"
-                                    Margin="20"
+                                    Margin="10" TextChanged="TextBox_TextChanged"
                                     VerticalAlignment="Center" />
                                     <TextBox Grid.Row="1" Grid.Column="1"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Eje" x:Name="OjoDerechoEjeTextBox"
-                                    Margin="20"
+                                    Margin="10" TextChanged="TextBox_TextChanged"
                                     VerticalAlignment="Center" />
                                     <TextBox Grid.Row="1" Grid.Column="2"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Adicion" x:Name="OjoDerechoAdicionTextBox"
-                                    Margin="20"
+                                    Margin="10" TextChanged="TextBox_TextChanged"
                                     VerticalAlignment="Center" />
                                     <TextBox Grid.Row="2" Grid.Column="0"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Presion Ocular" x:Name="OjoDerechoPresionOcularTextBox"
-                                    Margin="20"
+                                    Margin="10" TextChanged="TextBox_TextChanged"
                                     VerticalAlignment="Center" />
                                     <TextBox Grid.Row="2" Grid.Column="1"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Distancia Pupilar" x:Name="OjoDerechoDistanciaPupilarTextBox"
-                                    Margin="20"
+                                    Margin="10" TextChanged="TextBox_TextChanged"
                                     VerticalAlignment="Center" />
                                     <TextBox Grid.Row="2" Grid.Column="2"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Tipo de Lente" x:Name="OjoDerechoTipoLenteTextBox"
-                                    Margin="20"
+                                    Margin="10" TextChanged="TextBox_TextChanged"
                                     VerticalAlignment="Center" />
                                 </Grid>
                                 <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" HorizontalAlignment="Left" VerticalAlignment="Top"  Grid.Row="10" Grid.Column="1" Margin="20,10">
@@ -804,54 +805,54 @@
                                     <TextBox Grid.Row="0" Grid.Column="0"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="AVI" x:Name="OjoIzquierdoAVITextBox"
-                                    Margin="20"
+                                    Margin="10" TextChanged="TextBox_TextChanged"
                                     VerticalAlignment="Center" />
                                     <TextBox Grid.Row="0" Grid.Column="1"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="AVF" x:Name="OjoIzquierdoAVFTextBox"
-                                    Margin="20"
+                                    Margin="10" TextChanged="TextBox_TextChanged"
                                     VerticalAlignment="Center" />
                                     <TextBox Grid.Row="0" Grid.Column="2"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Esfera" x:Name="OjoIzquierdoEsferaTextBox"
-                                    Margin="20"
+                                    Margin="10" TextChanged="TextBox_TextChanged"
                                     VerticalAlignment="Center" />
                                     <TextBox Grid.Row="1" Grid.Column="0"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Cilindro" x:Name="OjoIzquierdoCilindroTextBox"
-                                    Margin="20"
+                                    Margin="10" TextChanged="TextBox_TextChanged"
                                     VerticalAlignment="Center" />
                                     <TextBox Grid.Row="1" Grid.Column="1"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Eje" x:Name="OjoIzquierdoEjeTextBox"
-                                    Margin="20"
+                                    Margin="10" TextChanged="TextBox_TextChanged"
                                     VerticalAlignment="Center" />
                                     <TextBox Grid.Row="1" Grid.Column="2"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Adicion" x:Name="OjoIzquierdoAdicionTextBox"
-                                    Margin="20"
+                                    Margin="10" TextChanged="TextBox_TextChanged"
                                     VerticalAlignment="Center" />
                                     <TextBox Grid.Row="2" Grid.Column="0"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Presion Ocular" x:Name="OjoIzquierdoPresionOcularTextBox"
-                                    Margin="20"
+                                    Margin="10" TextChanged="TextBox_TextChanged"
                                     VerticalAlignment="Center" />
                                     <TextBox Grid.Row="2" Grid.Column="1"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Distancia Pupilar" x:Name="OjoIzquierdoDistanciaPupilarTextBox"
-                                    Margin="20"
+                                    Margin="10" TextChanged="TextBox_TextChanged"
                                     VerticalAlignment="Center" />
                                     <TextBox Grid.Row="2" Grid.Column="2"
                                     Style="{StaticResource MaterialDesignFilledTextFieldTextBox}"
                                     materialDesign:HintAssist.Hint="Tipo de Lente" x:Name="OjoIzquierdoTipoLenteTextBox"
-                                    Margin="20"
+                                    Margin="10" TextChanged="TextBox_TextChanged"
                                     VerticalAlignment="Center" />
                                 </Grid>
                                 <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" HorizontalAlignment="Left" VerticalAlignment="Top"  Grid.Row="11" Grid.Column="1" Margin="20,10">
                             Diagnostico
                                 </TextBlock>
                                 <TextBox Grid.Row="11"
-                                     Margin="20,30,30,15"
+                                     Margin="20,30,30,15" TextChanged="TextBox_TextChanged"
                                     TextWrapping="Wrap"
                                     VerticalAlignment="Stretch"
                                     MinWidth="280"
@@ -865,7 +866,7 @@
                             Notas
                                 </TextBlock>
                                 <TextBox Grid.Row="12"
-                                     Margin="20,30,30,15"
+                                     Margin="20,30,30,15" TextChanged="TextBox_TextChanged"
                                     TextWrapping="Wrap"
                                     VerticalAlignment="Stretch"
                                     MinWidth="280"

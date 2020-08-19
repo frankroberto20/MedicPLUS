@@ -28,32 +28,32 @@ namespace MedicPLUS.usercontrols
         public static ObservableCollection<Paciente> Pacientes = new ObservableCollection<Paciente>();
         FileData fileData = new FileData();
 
-        public static List<string> AntecedentesPersonalesMainLst = new List<string>();
-        public static List<string> AntecedentesFamiliaresMainLst = new List<string>();
-        public static List<string> MotivoConsultaMainLst = new List<string>();
-        public static List<string> SignosSintomasMainLst = new List<string>();
-        public static List<string> SegmentoAnteriorMainLst = new List<string>();
-        public static List<string> AnexosMainLst = new List<string>();
-        public static List<string> MediosMainLst = new List<string>();
-        public static List<string> FondoOjoMainLst = new List<string>();
-        public static List<string> TratamientoMainLst = new List<string>();
+        public static List<ListBoxItem> AntecedentesPersonalesMainLst = new List<ListBoxItem>();
+        public static List<ListBoxItem> AntecedentesFamiliaresMainLst = new List<ListBoxItem>();
+        public static List<ListBoxItem> MotivoConsultaMainLst = new List<ListBoxItem>();
+        public static List<ListBoxItem> SignosSintomasMainLst = new List<ListBoxItem>();
+        public static List<ListBoxItem> SegmentoAnteriorMainLst = new List<ListBoxItem>();
+        public static List<ListBoxItem> AnexosMainLst = new List<ListBoxItem>();
+        public static List<ListBoxItem> MediosMainLst = new List<ListBoxItem>();
+        public static List<ListBoxItem> FondoOjoMainLst = new List<ListBoxItem>();
+        public static List<ListBoxItem> TratamientoMainLst = new List<ListBoxItem>();
 
         public UserControlPacientes()
         {
             InitializeComponent();
 
-            
-            if (File.Exists(fileData.FilePathPacientes))
-            {
-                fileData.RecuperarLista(Pacientes);
+            AntecedentesPersonalesMainLst = DBManager.GetSourceRegistrosByCategoria(CategoriaRegistro.AntecedentesPersonales);
+            AntecedentesFamiliaresMainLst = DBManager.GetSourceRegistrosByCategoria(CategoriaRegistro.AntecedentesFamiliares);
+            MotivoConsultaMainLst = DBManager.GetSourceRegistrosByCategoria(CategoriaRegistro.MotivoConsulta);
+            SignosSintomasMainLst = DBManager.GetSourceRegistrosByCategoria(CategoriaRegistro.SignosSintomas);
+            SegmentoAnteriorMainLst = DBManager.GetSourceRegistrosByCategoria(CategoriaRegistro.SegmentoAnterior);
+            AnexosMainLst = DBManager.GetSourceRegistrosByCategoria(CategoriaRegistro.Anexos);
+            MediosMainLst = DBManager.GetSourceRegistrosByCategoria(CategoriaRegistro.Medios);
+            FondoOjoMainLst = DBManager.GetSourceRegistrosByCategoria(CategoriaRegistro.FondoOjo);
+            TratamientoMainLst = DBManager.GetSourceRegistrosByCategoria(CategoriaRegistro.Tratamiento);
 
-                foreach (var paciente in Pacientes)
-                    fileData.RecuperarRegistros(paciente);
-            }
-
-            fileData.RecuperarListasRegistros(AntecedentesPersonalesMainLst, AntecedentesFamiliaresMainLst, MotivoConsultaMainLst, SignosSintomasMainLst, SegmentoAnteriorMainLst, AnexosMainLst, MediosMainLst, FondoOjoMainLst, TratamientoMainLst);
-
-            DataGridPacientes.ItemsSource = DBManager.GetPacientes();
+            Pacientes = DBManager.GetPacientes();
+            DataGridPacientes.ItemsSource = Pacientes;
             
         }
 
@@ -73,6 +73,26 @@ namespace MedicPLUS.usercontrols
             }
         }
 
+        private void SearchDeleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SearchFieldTextBox.Text = "";
+        }
+
+        private void SearchFieldTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (SearchFieldTextBox.Text != "")
+            {
+                SearchDeleteBtn.Visibility = Visibility.Visible;
+                DataGridPacientes.ItemsSource = Pacientes.Where(paciente => (paciente.Nombre.ToLower() + " " + paciente.Apellidos.ToLower()).Contains(SearchFieldTextBox.Text));
+            }
+            else
+            {
+                SearchDeleteBtn.Visibility = Visibility.Collapsed;
+                DataGridPacientes.ItemsSource = Pacientes;
+            }
+                
+        }
+
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if ((sender as DataGridRow).GetIndex() != -1)
@@ -80,6 +100,17 @@ namespace MedicPLUS.usercontrols
                 AgregarRegistroWindow agregarRegistro = new AgregarRegistroWindow((Paciente)DataGridPacientes.SelectedItem);
                 agregarRegistro.ShowDialog();
             }
+        }
+
+        public void ReloadItemsSource()
+        {
+            var temp = DBManager.GetPacientes();
+            int count = Pacientes.Count;
+            for (int i = count; i < temp.Count; i++)
+            {
+                Pacientes.Add(temp[i]);
+            }
+            DataGridPacientes.Items.Refresh();
         }
     }
 }

@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MaterialDesignThemes;
+using MedicPLUS.classes;
+using MedicPLUS.usercontrols;
 
 namespace MedicPLUS
 {
@@ -21,9 +23,12 @@ namespace MedicPLUS
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static UserControlPacientes UscPacientes;
+
         public MainWindow()
         {
             InitializeComponent();
+            UscPacientes = uscPacientes;
         }
 
         private void Close_Click(object sender, RoutedEventArgs e)
@@ -60,5 +65,11 @@ namespace MedicPLUS
         {
             DragMove();
         }
+
+        public static void ReloadPacientesItemsSource()
+        {
+            UscPacientes.ReloadItemsSource();
+        }
+
     }
 }

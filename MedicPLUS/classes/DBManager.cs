@@ -7,22 +7,37 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace MedicPLUS.classes
 {
+    public enum CategoriaRegistro
+    {
+        AntecedentesPersonales,
+        AntecedentesFamiliares,
+        MotivoConsulta,
+        SignosSintomas,
+        SegmentoAnterior,
+        Anexos,
+        Medios,
+        FondoOjo,
+        Tratamiento
+    }
+
     static class DBManager
     {
+
         static string connectionString = ConfigurationManager.ConnectionStrings["MedicPlusConnectionString"].ConnectionString;
-        static public void InsertPaciente(Paciente paciente)
+        static public int InsertPaciente(Paciente paciente)
         {
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                try
-                {
                 connection.Open();
-                SqlCommand cmd = new SqlCommand("stp_InsertPaciente", connection);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                SqlCommand cmd = new SqlCommand("stp_InsertPaciente", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
 
                 cmd.Parameters.Add(new SqlParameter("@nombres", paciente.Nombre));
                 cmd.Parameters.Add(new SqlParameter("@apellidos", paciente.Apellidos));
@@ -30,14 +45,7 @@ namespace MedicPLUS.classes
                 cmd.Parameters.Add(new SqlParameter("@telefono", paciente.Telefono));
                 cmd.Parameters.Add(new SqlParameter("@correo", paciente.Correo));
 
-                cmd.ExecuteNonQuery();
-
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.Message);
-
-                }
+                return int.Parse(cmd.ExecuteScalar().ToString());
             }
         }
 
@@ -47,8 +55,10 @@ namespace MedicPLUS.classes
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                SqlCommand cmd = new SqlCommand("stp_SelectAllPacientes", connection);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                SqlCommand cmd = new SqlCommand("stp_SelectAllPacientes", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -91,7 +101,7 @@ namespace MedicPLUS.classes
                 cmd.Parameters.Add(new SqlParameter("@od_Adicion", registro.OjoDerecho.Adicion));
                 cmd.Parameters.Add(new SqlParameter("@od_PresionOcular", registro.OjoDerecho.PresionOcular));
                 cmd.Parameters.Add(new SqlParameter("@od_DistanciaPupilar", registro.OjoDerecho.DistanciaPupilar));
-                cmd.Parameters.Add(new SqlParameter("@od_TipoLente", registro.OjoIzquierdo.TipoLente));
+                cmd.Parameters.Add(new SqlParameter("@od_TipoLente", registro.OjoDerecho.TipoLente));
                 cmd.Parameters.Add(new SqlParameter("@oi_AgudezaVisualI", registro.OjoIzquierdo.AgudezaVisualInicial));
                 cmd.Parameters.Add(new SqlParameter("@oi_AgudezaVisualF", registro.OjoIzquierdo.AgudezaVisualFinal));
                 cmd.Parameters.Add(new SqlParameter("@oi_Esfera", registro.OjoIzquierdo.Esfera));
@@ -109,6 +119,42 @@ namespace MedicPLUS.classes
             paciente.Registros = GetRegistrosPaciente(paciente.ID);
         }
 
+        static public List<ListBoxItem> GetSourceRegistrosByCategoria(CategoriaRegistro categoria)
+        {
+            var sourceRegistros = new List<ListBoxItem>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand("stp_SelectSourceRegistrosByCategoria", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@categoria", categoria));
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    sourceRegistros.Add(new ListBoxItem{Content = reader["Texto"].ToString() });
+                }
+            }
+            return sourceRegistros;
+        }
+
+        static public void InsertSourceRegistro(string texto, CategoriaRegistro categoria)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand cmd = new SqlCommand("stp_InsertSourceRegistro", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
+                cmd.Parameters.Add(new SqlParameter("@texto", texto));
+                cmd.Parameters.Add(new SqlParameter("@categoria", categoria));
+                
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         static public List<Registro> GetRegistrosPaciente(int pacienteID)
         {
             var registros = new List<Registro>();
@@ -116,8 +162,10 @@ namespace MedicPLUS.classes
             {
 
                 connection.Open();
-                SqlCommand cmd = new SqlCommand("stp_SelectRegistrosByPacienteId", connection);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                SqlCommand cmd = new SqlCommand("stp_SelectRegistrosByPacienteId", connection)
+                {
+                    CommandType = System.Data.CommandType.StoredProcedure
+                };
                 cmd.Parameters.Add(new SqlParameter("@idPaciente", pacienteID));
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())

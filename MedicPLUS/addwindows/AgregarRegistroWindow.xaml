@@ -13,7 +13,8 @@
         Background="{x:Null}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         FontFamily="{DynamicResource MaterialDesignFont}"
-        Title="AgregarPacienteWindow" Height="700" Width="1150" WindowStyle="None" AllowsTransparency="True">
+        Title="AgregarPacienteWindow" Height="700" Width="1150" WindowStyle="None" AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="ListBoxEditMode" TargetType="ListBoxItem">
             <Setter Property="OverridesDefaultStyle" Value="true" />

@@ -28,7 +28,45 @@
                     Width="24" />
         </Button>
         <Grid Grid.Row="1">
-            <DataGrid x:Name="DataGridPacientes" HorizontalAlignment="Center" VerticalAlignment="Center" Height="560" Width="1050" 
+            <materialDesign:ColorZone Mode="Accent">
+                <materialDesign:ColorZone Margin="40,10,40,10" CornerRadius="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition
+                                Width="Auto" />
+                            <ColumnDefinition
+                                Width="*" />
+                            <ColumnDefinition
+                                Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button
+                            Style="{DynamicResource MaterialDesignToolButton}">
+                            <materialDesign:PackIcon
+                                Kind="Magnify"
+                                Opacity=".56" />
+                        </Button>
+                        <TextBox x:Name="SearchFieldTextBox"
+                            Grid.Column="1"
+                            Margin="8 0 0 0"
+                            materialDesign:HintAssist.Hint="Busqueda"
+                            materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                            BorderThickness="0"
+                            MinWidth="200"
+                            VerticalAlignment="Center"
+                            TextChanged="SearchFieldTextBox_TextChanged"/>
+                        <Button x:Name="SearchDeleteBtn" Click="SearchDeleteBtn_Click"
+                            Style="{DynamicResource MaterialDesignToolButton}"
+                            Grid.Column="2" Margin="0,0,15,0"
+                            Visibility="Collapsed">
+                            <materialDesign:PackIcon
+                            Kind="RemoveCircle"
+                            Opacity=".56"
+                            Margin="8 0 0 0" />
+                        </Button>
+                    </Grid>
+                </materialDesign:ColorZone>
+            </materialDesign:ColorZone>
+            <DataGrid x:Name="DataGridPacientes" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="30,60,30,30"
                       AutoGenerateColumns="True" ColumnWidth="*"
                       IsReadOnly="True" 
                       SelectionMode="Single"

@@ -53,17 +53,19 @@ namespace MedicPLUS.addwindows
         {
             Paciente paciente = new Paciente() { Nombre = NameTextBox.Text, Apellidos = LastNameTextBox.Text, Telefono = PhoneTextBox.Text, Correo = MailTextBox.Text, Edad = (int)AgeComboBox.SelectedItem };
 
-            OjoDerecho ojoDerecho = new OjoDerecho { AgudezaVisualInicial = OjoDerechoAVITextBox.Text, 
+            OjoDerecho ojoDerecho = new OjoDerecho { 
+                AgudezaVisualInicial = OjoDerechoAVITextBox.Text, 
                 AgudezaVisualFinal = OjoDerechoAVFTextBox.Text, 
                 Adicion = OjoDerechoAdicionTextBox.Text, 
-                Cilindro = OjoDerechoCilindroTextBox.Text, 
+                Cilindro = OjoDerechoCilindroTextBox.Text,
                 DistanciaPupilar = OjoDerechoDistanciaPupilarTextBox.Text, 
                 Eje = OjoDerechoEjeTextBox.Text, 
                 Esfera = OjoDerechoEsferaTextBox.Text, 
                 PresionOcular = OjoDerechoPresionOcularTextBox.Text, 
                 TipoLente = OjoDerechoTipoLenteTextBox.Text };
 
-            OjoIzquierdo ojoIzquierdo = new OjoIzquierdo { AgudezaVisualInicial = OjoIzquierdoAVITextBox.Text, 
+            OjoIzquierdo ojoIzquierdo = new OjoIzquierdo { 
+                AgudezaVisualInicial = OjoIzquierdoAVITextBox.Text, 
                 AgudezaVisualFinal = OjoIzquierdoAVFTextBox.Text, 
                 Adicion = OjoIzquierdoAdicionTextBox.Text, 
                 Cilindro = OjoIzquierdoCilindroTextBox.Text, 
@@ -74,22 +76,56 @@ namespace MedicPLUS.addwindows
                 TipoLente = OjoIzquierdoTipoLenteTextBox.Text };
 
             Registro registro = new Registro{
-                AntecedentesPersonales = AntecedentesPersonalesListBox.SelectedItems.Cast<string>().ToList(),
-                AntecedentesFamiliares = AntecedentesFamiliaresListBox.SelectedItems.Cast<string>().ToList(),
-                MotivoConsulta = MotivoConsultaListBox.SelectedItems.Cast<string>().ToList(), 
-                SignosSintomas = SignosSintomasListBox.SelectedItems.Cast<string>().ToList(), 
-                SegmentoAnterior = SegmentoAnteriorListBox.SelectedItems.Cast<string>().ToList(), 
-                Anexos = AnexosListBox.SelectedItems.Cast<string>().ToList(), 
-                Medios = MediosListBox.SelectedItems.Cast<string>().ToList(), 
-                FondoOjo = FondoOjoListBox.SelectedItems.Cast<string>().ToList(), 
-                OjoIzquierdo = ojoIzquierdo, 
-                OjoDerecho = ojoDerecho, 
-                Diagnostico = DiagnosticoTextBox.Text, 
+                AntecedentesPersonales = GetListString(AntecedentesPersonalesListBox),
+                AntecedentesFamiliares = GetListString(AntecedentesFamiliaresListBox),
+                MotivoConsulta = GetListString(MotivoConsultaListBox),
+                SignosSintomas = GetListString(SignosSintomasListBox),
+                SegmentoAnterior = GetListString(SegmentoAnteriorListBox),
+                Anexos = GetListString(AnexosListBox),
+                Medios = GetListString(MediosListBox),
+                FondoOjo = GetListString(FondoOjoListBox),
+
+                OjoIzquierdo = ojoIzquierdo,
+                OjoDerecho = ojoDerecho,
+                Diagnostico = DiagnosticoTextBox.Text,
                 Notas = NotasTextBox.Text
             };
 
-            DBManager.InsertPaciente(paciente);
+            paciente.ID = DBManager.InsertPaciente(paciente);
             DBManager.InsertRegistro(paciente, registro);
+
+            MainWindow.ReloadPacientesItemsSource();
+        }
+
+        private bool IsRegistroEmpty()
+        {
+            if( OjoDerechoAVITextBox.Text != "" ||
+                OjoDerechoAVFTextBox.Text != "" || 
+                OjoDerechoAdicionTextBox.Text != "" || 
+                OjoDerechoCilindroTextBox.Text != "" ||
+                OjoDerechoDistanciaPupilarTextBox.Text != "" || 
+                OjoDerechoEjeTextBox.Text != "" || 
+                OjoDerechoEsferaTextBox.Text != "" ||
+                OjoDerechoPresionOcularTextBox.Text != "" ||
+                OjoDerechoTipoLenteTextBox.Text != "" ||
+                OjoIzquierdoAVITextBox.Text != "" ||
+                OjoIzquierdoAVFTextBox.Text != "" || 
+                OjoIzquierdoAdicionTextBox.Text != "" ||
+                OjoIzquierdoCilindroTextBox.Text != "" ||
+                OjoIzquierdoDistanciaPupilarTextBox.Text != "" || 
+                OjoIzquierdoEjeTextBox.Text != "" ||
+                OjoIzquierdoEsferaTextBox.Text != "" ||
+                OjoIzquierdoPresionOcularTextBox.Text != "" || 
+                OjoIzquierdoTipoLenteTextBox.Text != "" ||
+                DiagnosticoTextBox.Text != "" ||
+                NotasTextBox.Text != "")
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         private void Border_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -101,99 +137,108 @@ namespace MedicPLUS.addwindows
         {
             if (AntecedentesPersonalesTextBox.Text != "")
             {
-                fileData.AgregarListaRegistros(UserControlPacientes.AntecedentesPersonalesMainLst, AntecedentesPersonalesTextBox.Text, FileData.RegistrosPropiedades.AntecedentesPersonales);
+                DBManager.InsertSourceRegistro(AntecedentesPersonalesTextBox.Text, CategoriaRegistro.AntecedentesPersonales);
+                //fileData.AgregarListaRegistros(UserControlPacientes.AntecedentesPersonalesMainLst, AntecedentesPersonalesTextBox.Text, FileData.RegistrosPropiedades.AntecedentesPersonales);
             }
 
-            AntecedentesPersonalesListBox.ItemsSource = null;
-            AntecedentesPersonalesListBox.ItemsSource = UserControlPacientes.AntecedentesPersonalesMainLst;
+            RefreshList(CategoriaRegistro.AntecedentesPersonales, UserControlPacientes.AntecedentesPersonalesMainLst, AntecedentesPersonalesListBox, AntecedentesPersonalesTextBox);
         }
 
         private void AddAntecedentesFamiliaresBtn_Click(object sender, RoutedEventArgs e)
         {
             if (AntecedentesFamiliaresTextBox.Text != "")
             {
-                fileData.AgregarListaRegistros(UserControlPacientes.AntecedentesFamiliaresMainLst, AntecedentesFamiliaresTextBox.Text, FileData.RegistrosPropiedades.AntecedentesFamiliares);
+                DBManager.InsertSourceRegistro(AntecedentesFamiliaresTextBox.Text, CategoriaRegistro.AntecedentesFamiliares);
+                //fileData.AgregarListaRegistros(UserControlPacientes.AntecedentesFamiliaresMainLst, AntecedentesFamiliaresTextBox.Text, FileData.RegistrosPropiedades.AntecedentesFamiliares);
             }
 
-            AntecedentesFamiliaresListBox.ItemsSource = null;
-            AntecedentesFamiliaresListBox.ItemsSource = UserControlPacientes.AntecedentesFamiliaresMainLst;
+            RefreshList(CategoriaRegistro.AntecedentesFamiliares, UserControlPacientes.AntecedentesFamiliaresMainLst, AntecedentesFamiliaresListBox, AntecedentesFamiliaresTextBox);
         }
 
         private void AddMotivoConsultaBtn_Click(object sender, RoutedEventArgs e)
         {
             if (MotivoConsultaTextBox.Text != "")
             {
-                fileData.AgregarListaRegistros(UserControlPacientes.MotivoConsultaMainLst, MotivoConsultaTextBox.Text, FileData.RegistrosPropiedades.MotivoConsulta);
+                DBManager.InsertSourceRegistro(MotivoConsultaTextBox.Text, CategoriaRegistro.MotivoConsulta);
+                //fileData.AgregarListaRegistros(UserControlPacientes.MotivoConsultaMainLst, MotivoConsultaTextBox.Text, FileData.RegistrosPropiedades.MotivoConsulta);
             }
 
-            MotivoConsultaListBox.ItemsSource = null;
-            MotivoConsultaListBox.ItemsSource = UserControlPacientes.MotivoConsultaMainLst;
+            RefreshList(CategoriaRegistro.MotivoConsulta, UserControlPacientes.MotivoConsultaMainLst, MotivoConsultaListBox, MotivoConsultaTextBox);
         }
 
         private void AddSignosSintomasBtn_Click(object sender, RoutedEventArgs e)
         {
             if (SignosSintomasTextBox.Text != "")
             {
-                fileData.AgregarListaRegistros(UserControlPacientes.SignosSintomasMainLst, SignosSintomasTextBox.Text, FileData.RegistrosPropiedades.SignosSintomas);
+                DBManager.InsertSourceRegistro(SignosSintomasTextBox.Text, CategoriaRegistro.SignosSintomas);
+                //fileData.AgregarListaRegistros(UserControlPacientes.SignosSintomasMainLst, SignosSintomasTextBox.Text, FileData.RegistrosPropiedades.SignosSintomas);
             }
 
-            SignosSintomasListBox.ItemsSource = null;
-            SignosSintomasListBox.ItemsSource = UserControlPacientes.SignosSintomasMainLst;
+            RefreshList(CategoriaRegistro.SignosSintomas, UserControlPacientes.SignosSintomasMainLst, SignosSintomasListBox, SignosSintomasTextBox);
         }
 
         private void AddSegmentoAnteriorBtn_Click(object sender, RoutedEventArgs e)
         {
             if (SegmentoAnteriorTextBox.Text != "")
             {
-                fileData.AgregarListaRegistros(UserControlPacientes.SegmentoAnteriorMainLst, SegmentoAnteriorTextBox.Text, FileData.RegistrosPropiedades.SegmentoAnterior);
+                DBManager.InsertSourceRegistro(SegmentoAnteriorTextBox.Text, CategoriaRegistro.SegmentoAnterior);
+                //fileData.AgregarListaRegistros(UserControlPacientes.SegmentoAnteriorMainLst, SegmentoAnteriorTextBox.Text, FileData.RegistrosPropiedades.SegmentoAnterior);
             }
-
-            SegmentoAnteriorListBox.ItemsSource = null;
-            SegmentoAnteriorListBox.ItemsSource = UserControlPacientes.SegmentoAnteriorMainLst;
+            
+            RefreshList(CategoriaRegistro.SegmentoAnterior, UserControlPacientes.SegmentoAnteriorMainLst, SegmentoAnteriorListBox, SegmentoAnteriorTextBox);
         }
 
         private void AddAnexosBtn_Click(object sender, RoutedEventArgs e)
         {
             if (AnexosTextBox.Text != "")
             {
-                fileData.AgregarListaRegistros(UserControlPacientes.AnexosMainLst, AnexosTextBox.Text, FileData.RegistrosPropiedades.Anexos);
+                DBManager.InsertSourceRegistro(AnexosTextBox.Text, CategoriaRegistro.Anexos);
+                //fileData.AgregarListaRegistros(UserControlPacientes.AnexosMainLst, AnexosTextBox.Text, FileData.RegistrosPropiedades.Anexos);
             }
 
-            AnexosListBox.ItemsSource = null;
-            AnexosListBox.ItemsSource = UserControlPacientes.AnexosMainLst;
+            RefreshList(CategoriaRegistro.Anexos, UserControlPacientes.AnexosMainLst, AnexosListBox, AnexosTextBox);
         }
 
         private void AddMediosBtn_Click(object sender, RoutedEventArgs e)
         {
             if (MediosTextBox.Text != "")
             {
-                fileData.AgregarListaRegistros(UserControlPacientes.MediosMainLst, MediosTextBox.Text, FileData.RegistrosPropiedades.Medios);
+                DBManager.InsertSourceRegistro(MediosTextBox.Text, CategoriaRegistro.Medios);
+                //fileData.AgregarListaRegistros(UserControlPacientes.MediosMainLst, MediosTextBox.Text, FileData.RegistrosPropiedades.Medios);
             }
 
-            MediosListBox.ItemsSource = null;
-            MediosListBox.ItemsSource = UserControlPacientes.MediosMainLst;
+            RefreshList(CategoriaRegistro.Medios, UserControlPacientes.MediosMainLst, MediosListBox, MediosTextBox);
         }
 
         private void AddFondoOjoBtn_Click(object sender, RoutedEventArgs e)
         {
             if (FondoOjoTextBox.Text != "")
             {
-                fileData.AgregarListaRegistros(UserControlPacientes.FondoOjoMainLst, FondoOjoTextBox.Text, FileData.RegistrosPropiedades.FondoOjo);
+                DBManager.InsertSourceRegistro(FondoOjoTextBox.Text, CategoriaRegistro.FondoOjo);
+                //fileData.AgregarListaRegistros(UserControlPacientes.FondoOjoMainLst, FondoOjoTextBox.Text, FileData.RegistrosPropiedades.FondoOjo);
             }
 
-            FondoOjoListBox.ItemsSource = null;
-            FondoOjoListBox.ItemsSource = UserControlPacientes.FondoOjoMainLst;
+            RefreshList(CategoriaRegistro.FondoOjo, UserControlPacientes.FondoOjoMainLst, FondoOjoListBox, FondoOjoTextBox);
         }
 
         private void AddTratamientoBtn_Click(object sender, RoutedEventArgs e)
         {
             if (TratamientoTextBox.Text != "")
             {
-                fileData.AgregarListaRegistros(UserControlPacientes.TratamientoMainLst, TratamientoTextBox.Text, FileData.RegistrosPropiedades.Tratamiento);
+                DBManager.InsertSourceRegistro(TratamientoTextBox.Text, CategoriaRegistro.Tratamiento);
+                //fileData.AgregarListaRegistros(UserControlPacientes.TratamientoMainLst, TratamientoTextBox.Text, FileData.RegistrosPropiedades.Tratamiento);
             }
 
-            TratamientoListBox.ItemsSource = null;
-            TratamientoListBox.ItemsSource = UserControlPacientes.TratamientoMainLst;
+            RefreshList(CategoriaRegistro.Tratamiento, UserControlPacientes.TratamientoMainLst, TratamientoListBox, TratamientoTextBox);
+        }
+
+        private void RefreshList(CategoriaRegistro categoria, List<ListBoxItem> mainList, ListBox itemsList, TextBox textBox)
+        {
+            var temp = DBManager.GetSourceRegistrosByCategoria(categoria);
+            int count = mainList.Count;
+            mainList.AddRange(temp.GetRange(count, temp.Count - count));
+            itemsList.Items.Refresh();
+            textBox.Text = "";
         }
 
         private void CloseDialogBtn_Click(object sender, RoutedEventArgs e)
@@ -203,18 +248,40 @@ namespace MedicPLUS.addwindows
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (NameTextBox.Text != "" && LastNameTextBox.Text != "" && AgeComboBox.SelectedItem != null)
+            if (NameTextBox.Text != "" && LastNameTextBox.Text != "" && AgeComboBox.SelectedItem != null && !IsRegistroEmpty())
             {
                 SaveBtn.IsEnabled = true;
+            }
+            else
+            {
+                SaveBtn.IsEnabled = false;
             }
         }
 
         private void AgeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (NameTextBox.Text != "" && LastNameTextBox.Text != "" && AgeComboBox.SelectedItem != null)
+            if (NameTextBox.Text != "" && LastNameTextBox.Text != "" && AgeComboBox.SelectedItem != null && !IsRegistroEmpty())
             {
                 SaveBtn.IsEnabled = true;
             }
+            else
+            {
+                SaveBtn.IsEnabled = false;
+            }
+        }
+
+        private List<string> GetListString(ListBox list)
+        {
+            if (list == null)
+                return null;
+
+            var result = new List<string>();
+            foreach(ListBoxItem item in list.Items)
+            {
+                if(item.IsSelected == true)
+                    result.Add(item.Content.ToString());
+            }
+            return result;
         }
     }
 }
